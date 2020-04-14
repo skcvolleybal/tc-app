@@ -1,45 +1,45 @@
 <html>
 
 <head>
-   <script src="./libs/angular/angular.js?v=1.0.2"></script>
-   <script src="./libs/angular/angular-route.min.js?v=1.0.2"></script>
-   <script src="./libs/jQuery/jquery-3.2.1.min.js?v=1.0.2"></script>
-   <script src="./libs/bootstrap/bootstrap.min.js?v=1.0.2"></script>
-   <script src="./libs/ngDialog/js/ngDialog.min.js?v=1.0.2"></script>
-   <script src="./libs/angular-ui-notification/angular-ui-notification.min.js?v=1.0.2"></script>
-   <script src="./libs/jquery-ui/jquery-ui.min.js?v=1.0.2"></script>
+   <script src="./node_modules/angular/angular.min.js"></script>
+   <script src="./node_modules/angular-route/angular-route.min.js"></script>
+   <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+   <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>   
+   <script src="./node_modules/ng-dialog/js/ngDialog.min.js"></script>
+   <script src="./node_modules/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
+   <script src="./libs/jquery-ui/jquery-ui.min.js"></script>
 
-   <link rel="stylesheet" href="./libs/font-awesome/css/font-awesome.min.css?v=1.0.2">
-   <link rel="stylesheet" href="./libs/bootstrap/bootstrap.min.css?v=1.0.2">
-   <link rel="stylesheet" href="./css/main.css?v=1.0.2">
-   <link rel="stylesheet" href="./libs/ngDialog/css/ngDialog.min.css?v=1.0.2">
-   <link rel="stylesheet" href="./libs/ngDialog/css/ngDialog-theme-default.min.css?v=1.0.2">
-   <link rel="stylesheet" href="./libs/angular-ui-notification/angular-ui-notification.min.css?v=1.0.2">
+   <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
+   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+   <link rel="stylesheet" href="./css/main.css">
+   <link rel="stylesheet" href="./node_modules/ng-dialog/css/ngDialog.min.css">
+   <link rel="stylesheet" href="./node_modules/ng-dialog/css/ngDialog-theme-default.min.css">
+   <link rel="stylesheet" href="./node_modules/angular-ui-notification/dist/angular-ui-notification.min.css">
    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 
-   <script src="./app.js?v=1.0.2"></script>
+   <script src="./app.js"></script>
    <!--Controllers-->
-   <script src="./controllers/mainController.js?v=1.0.2"></script>
-   <script src="./controllers/addTeam/addTeamController.js?v=1.0.2"></script>
-   <script src="./controllers/addPlayer/addPlayerController.js?v=1.0.2"></script>
-   <script src="./controllers/login/loginController.js?v=1.0.2"></script>
-   <script src="./controllers/editTeamOrder/editTeamOrderController.js?v=1.0.2"></script>
-   <script src="./controllers/editTrainingSchedule/editTrainingScheduleController.js?v=1.0.2"></script>
+   <script src="./controllers/mainController.js"></script>
+   <script src="./controllers/addTeam/addTeamController.js"></script>
+   <script src="./controllers/addPlayer/addPlayerController.js"></script>
+   <script src="./controllers/login/loginController.js"></script>
+   <script src="./controllers/editTeamOrder/editTeamOrderController.js"></script>
+   <script src="./controllers/editTrainingSchedule/editTrainingScheduleController.js"></script>
 
    <!--Directives-->
-   <script src="./directives/ngEnterDirective.js?v=1.0.2"></script>
-   <script src="./directives/player/playerDirective.js?v=1.0.2"></script>
-   <script src="./directives/searchBar/searchBarDirective.js?v=1.0.2"></script>
-   <script src="./directives/groups/groupsDirective.js?v=1.0.2"></script>
-   <script src="./directives/legenda/legendaDirective.js?v=1.0.2"></script>
+   <script src="./directives/ngEnterDirective.js"></script>
+   <script src="./directives/player/playerDirective.js"></script>
+   <script src="./directives/searchBar/searchBarDirective.js"></script>
+   <script src="./directives/groups/groupsDirective.js"></script>
+   <script src="./directives/legenda/legendaDirective.js"></script>
    <!--Services-->
-   <script src="./services/IOService.js?v=1.0.2"></script>
-   <script src="./services/playerService.js?v=1.0.2"></script>
-   <script src="./services/changeService.js?v=1.0.2"></script>
-   <script src="./services/dataListsService.js?v=1.0.2"></script>
-   <script src="./services/loginService.js?v=1.0.2"></script>
-   <script src="./services/utilityService.js?v=1.0.2"></script>
-   <script src="./services/dragDropService.js?v=1.0.2"></script>
+   <script src="./services/IOService.js"></script>
+   <script src="./services/playerService.js"></script>
+   <script src="./services/changeService.js"></script>
+   <script src="./services/dataListsService.js"></script>
+   <script src="./services/loginService.js"></script>
+   <script src="./services/utilityService.js"></script>
+   <script src="./services/dragDropService.js"></script>
 </head>
 
 <body ng-app="tcApp" style="float: left; width: 100vw; overflow: hidden;" ng-controller="mainController" ng-ctrl-save="">

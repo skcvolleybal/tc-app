@@ -1,7 +1,7 @@
 (function (app) {
   app.service('IOService', function ($http, $q, Notification) {
-    var baseUrl = 'https://www.skcvolleybal.nl/tc-app/php/interface.php'
-    // var baseUrl = '/joomla-website/tc-app/php/interface.php';
+    // var baseUrl = 'https://www.skcvolleybal.nl/tc-app/php/interface.php'
+    var baseUrl = '/joomla-website/tc-app/php/interface.php';
 
     var executeAction = function (action, obj) {
       console.log(action);
