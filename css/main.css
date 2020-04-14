@@ -66,6 +66,12 @@
   font-style: italic;
 }
 
+.label-uitgeschreven {
+  color: #eee;
+  background-color: #555;
+  text-decoration: line-through;
+}
+
 .ui-draggable-dragging {
   z-index: 999;
 }
