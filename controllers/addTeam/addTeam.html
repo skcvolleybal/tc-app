@@ -1,0 +1,28 @@
+<div class="panel panel-primary">
+   <div class="panel-heading">
+      <h3 class="panel-title">Team Toevoegen</h3>
+   </div>
+   <div class="panel-body">
+      <div class="flex-column">
+         <div class="flex-row field-row">
+            <div class="field-property">Teamnaam: </div>
+            <div class="field-value"><input ng-model="name" /></div>
+         </div>
+         <div class="flex-row field-row">
+            <div class="field-property">Type: </div>
+            <div class="field-value">
+               <select ng-model="teamType" ng-options="type.type as type.name for type in teamTypes"></select>
+            </div>
+         </div>
+      </div>
+      <br />
+      <div class="flex-row-space-between">
+         <button type="button" class="btn btn-default" ng-click="closeThisDialog()">
+            <i class="fa fa-ban" aria-hidden="true"></i> Annuleren
+         </button>
+         <button type="button" class="btn btn-success" ng-click="AddTeam()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> Opslaan
+         </button>
+      </div>
+   </div>
+</div>

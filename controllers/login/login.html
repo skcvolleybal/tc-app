@@ -1,0 +1,30 @@
+<div class="panel panel-primary">
+   <div class="panel-heading">
+      <h3 class="panel-title">Inloggen</h3>
+   </div>
+   <div class="panel-body">
+      <div class="flex-column">
+         <div class="field-name flex-row">
+            <div class="field-property">Gebruikersnaam: </div>
+            <div class="field-value">
+               <input name="username" ng-model="username" ng-enter="login()" />
+            </div>
+         </div>
+         <div class="field-name flex-row">
+            <div class="field-property">Wachtwoord: </div>
+            <div class="field-value">
+               <input name="password" type="password" ng-model="password" ng-enter="login()" />
+            </div>
+         </div>
+      </div>
+      <br />
+      <div class="flex-row-space-between">
+         <button type="button" class="btn btn-default" ng-click="closeThisDialog()">
+            <i class="fa fa-ban" aria-hidden="true"></i> Annuleren
+         </button>
+         <button type="button" class="btn btn-success" ng-click="login()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> Inloggen
+         </button>
+      </div>
+   </div>
+</div>

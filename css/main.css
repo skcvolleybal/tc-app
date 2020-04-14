@@ -1,0 +1,106 @@
+.side-menu-button {
+  width: 40px;
+  margin: 5px;
+}
+
+.search-panel {
+  margin: 5px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row-space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-field {
+  border-bottom: 1px #ccc solid;
+}
+
+.ngdialog-content {
+  padding: 0px !important;
+}
+
+.field-property {
+  width: 150px;
+  margin: 5px;
+}
+
+.field-value {
+  margin: 5px;
+}
+
+.search-bar {
+  position: fixed;
+  left: 50px;
+  top: 0px;
+}
+
+.player {
+  position: absolute;
+  right: 18px;
+  width: 400px;
+  top: 0px;
+}
+
+.label-costum {
+  color: #808080;
+  border: 1px solid #808080;
+  background-color: whitesmoke;
+}
+
+.label-interesse {
+  color: #5e5e5e;
+  border: 1px solid #808080;
+  background-color: white;
+  font-style: italic;
+}
+
+.ui-draggable-dragging {
+  z-index: 999;
+}
+
+.align-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.align-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.order-list-item {
+  position: relative;
+  display: block;
+  padding-left: 10px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.legenda {
+  position: fixed;
+  left: 50px;
+  bottom: 0px;
+  margin: 5px;
+  width: 150px;
+}
+
+.legenda-item {
+  font-size: 15px;
+  margin: 4px;
+  display: flex;
+}

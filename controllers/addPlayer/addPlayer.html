@@ -1,0 +1,42 @@
+<div class="panel panel-primary">
+   <div class="panel-heading">
+      <h3 class="panel-title">Persoon Toevoegen</h3>
+   </div>
+   <div class="panel-body">
+      <div class="flex-column">
+         <div class="flex-row field-row">
+            <div class="field-property">Naam: </div>
+            <div class="field-value">
+               <input ng-model="player.name" ng-enter="AddPlayer(player)" />
+            </div>
+         </div>
+         <div class="flex-row field-row">
+            <div class="field-property">Team: </div>
+            <div class="field-value">
+               <select ng-model="player.teamId" ng-options="team.id as team.name for team in lists.teams"></select>
+            </div>
+         </div>
+         <div class="flex-row field-row">
+            <div class="field-property">Trainingsgroep:</div>
+            <div class="field-value">
+               <select ng-model="player.trainingId" ng-options="trainingGroup.id as trainingGroup.name for trainingGroup in lists.trainingGroups"></select>
+            </div>
+         </div>
+         <div class="flex-row field-row">
+            <div class="field-property">Type:</div>
+            <div class="field-value">
+               <select ng-model="player.typeId" ng-options="playerType.id as playerType.name for playerType in lists.playerTypes"></select>
+            </div>
+         </div>
+      </div>
+      <br />
+      <div class="flex-row-space-between">
+         <button type="button" class="btn btn-default" ng-click="closeThisDialog()">
+            <i class="fa fa-ban" aria-hidden="true"></i> Stoppen
+         </button>
+         <button type="button" class="btn btn-success" ng-click="AddPlayer(player)">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> Opslaan (en nog een)
+         </button>
+      </div>
+   </div>
+</div>

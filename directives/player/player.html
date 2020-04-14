@@ -1,0 +1,34 @@
+<div class="search-panel panel panel-primary">
+   <div class="panel-heading flex-row-space-between">
+      <h3 class="panel-title">{{selectedPlayer.name}}</h3>
+      <button type="button" class="close" ng-click="selectedPlayer = null">
+         <span>&times;</span>
+      </button>
+   </div>
+   <div class="panel-body flex-column">
+      <div>
+         <img ng-if="selectedPlayer.imageSrc != null" ng-src="selectedPlayer.imageSrc" />
+      </div>
+      <div class="flex-row">
+         <divc class="field-property">Team</divc>
+         <div class="field-value">{{selectedPlayer.team}}</div>
+      </div>
+      <div class="flex-row">
+         <div class="field-property">Trainingsgroep</div>
+         <div class="field-value">{{selectedPlayer.training}}</div>
+      </div>
+      <div class="flex-row">
+         <div class="field-property">Positie</div>
+         <div class="field-value">{{selectedPlayer.type}}</div>
+      </div>
+      <div class="flex-column">
+         <div class="field-property">Opmerkingen</div>
+         <div><textarea name="message" rows="10" style="width: 100%;" ng-model="selectedPlayer.information"></textarea></div>
+      </div>
+      <div class="align-right" style="margin-top: 20px;">
+         <button type="button" class="btn btn-success" ng-click="SavePlayer()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> Opslaan
+         </button>
+      </div>
+   </div>
+</div>

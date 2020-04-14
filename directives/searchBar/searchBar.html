@@ -1,0 +1,19 @@
+<div ng-show="isSearchBarOpen" class="search-panel panel panel-primary">
+   <div class="panel-heading flex-row-space-between">
+      <h3 class="panel-title">Zoeken</h3>
+      <button type="button" class="close" ng-click="isSearchBarOpen = false">
+         <span>&times;</span>
+      </button>
+   </div>
+   <div class="search-field panel-body flex-row">
+      <input id="searchBox" ng-model="searchString" placeholder="Zoek naar spelers" ng-enter="Search()" />
+      <button class="btn btn-default" ng-click="Search()">
+         <i class="fa fa-search"></i>
+      </button>
+   </div>
+   <div class="result-list flex-column">
+      <button class="btn btn-default" ng-repeat="player in searchList" ng-click="EditPlayer(player.id)">
+         {{player.name}}
+      </button>
+   </div>
+</div>

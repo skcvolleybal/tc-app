@@ -1,0 +1,26 @@
+<div class="panel panel-primary">
+   <div class="panel-heading">
+      <h3 class="panel-title">Volgorde veranderen</h3>
+   </div>
+   <div class="panel-body">
+      <div>
+         <ul class="list-group" id="sortableList">
+            <li class="ui-state-default order-list-item" 
+                team-id="{{team.id}}"
+                style="list-style-type: none; cursor: move;" 
+                ng-repeat="team in orderList.teams">
+               <i class="fa fa-arrows-v"></i> {{team.name}}
+            </li>
+         </ul>
+      </div>
+      <br />
+      <div class="flex-row-space-between">
+         <button type="button" class="btn btn-default" ng-click="closeThisDialog()">
+            <i class="fa fa-ban" aria-hidden="true"></i> Annuleren
+         </button>
+         <button type="button" class="btn btn-success" ng-click="SaveOrder()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> Opslaan
+         </button>
+      </div>
+   </div>
+</div>

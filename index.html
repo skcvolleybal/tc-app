@@ -1,0 +1,102 @@
+<html>
+
+<head>
+   <script src="./libs/angular/angular.js?v=1.0.2"></script>
+   <script src="./libs/angular/angular-route.min.js?v=1.0.2"></script>
+   <script src="./libs/jQuery/jquery-3.2.1.min.js?v=1.0.2"></script>
+   <script src="./libs/bootstrap/bootstrap.min.js?v=1.0.2"></script>
+   <script src="./libs/ngDialog/js/ngDialog.min.js?v=1.0.2"></script>
+   <script src="./libs/angular-ui-notification/angular-ui-notification.min.js?v=1.0.2"></script>
+   <script src="./libs/jquery-ui/jquery-ui.min.js?v=1.0.2"></script>
+
+   <link rel="stylesheet" href="./libs/font-awesome/css/font-awesome.min.css?v=1.0.2">
+   <link rel="stylesheet" href="./libs/bootstrap/bootstrap.min.css?v=1.0.2">
+   <link rel="stylesheet" href="./css/main.css?v=1.0.2">
+   <link rel="stylesheet" href="./libs/ngDialog/css/ngDialog.min.css?v=1.0.2">
+   <link rel="stylesheet" href="./libs/ngDialog/css/ngDialog-theme-default.min.css?v=1.0.2">
+   <link rel="stylesheet" href="./libs/angular-ui-notification/angular-ui-notification.min.css?v=1.0.2">
+   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+
+   <script src="./app.js?v=1.0.2"></script>
+   <!--Controllers-->
+   <script src="./controllers/mainController.js?v=1.0.2"></script>
+   <script src="./controllers/addTeam/addTeamController.js?v=1.0.2"></script>
+   <script src="./controllers/addPlayer/addPlayerController.js?v=1.0.2"></script>
+   <script src="./controllers/login/loginController.js?v=1.0.2"></script>
+   <script src="./controllers/editTeamOrder/editTeamOrderController.js?v=1.0.2"></script>
+   <script src="./controllers/editTrainingSchedule/editTrainingScheduleController.js?v=1.0.2"></script>
+
+   <!--Directives-->
+   <script src="./directives/ngEnterDirective.js?v=1.0.2"></script>
+   <script src="./directives/player/playerDirective.js?v=1.0.2"></script>
+   <script src="./directives/searchBar/searchBarDirective.js?v=1.0.2"></script>
+   <script src="./directives/groups/groupsDirective.js?v=1.0.2"></script>
+   <script src="./directives/legenda/legendaDirective.js?v=1.0.2"></script>
+   <!--Services-->
+   <script src="./services/IOService.js?v=1.0.2"></script>
+   <script src="./services/playerService.js?v=1.0.2"></script>
+   <script src="./services/changeService.js?v=1.0.2"></script>
+   <script src="./services/dataListsService.js?v=1.0.2"></script>
+   <script src="./services/loginService.js?v=1.0.2"></script>
+   <script src="./services/utilityService.js?v=1.0.2"></script>
+   <script src="./services/dragDropService.js?v=1.0.2"></script>
+</head>
+
+<body ng-app="tcApp" style="float: left; width: 100vw; overflow: hidden;" ng-controller="mainController" ng-ctrl-save="">
+   <div style="width: 50px; float:left; height: 100vh; background-color: #337ab7">
+      <button type="button" data-toggle="tooltip" data-placement="right" title="Teams/Trainingsgroepen" ng-click="isTeamsActive = !isTeamsActive"
+              class="btn side-menu-button btn-primary" aria-label="Left Align" ng-class="[{'btn-info': isTeamsActive, 'btn-success': !isTeamsActive}]">
+         <i class="fa fa-group"></i>
+      </button>
+      <button type="button" data-toggle="tooltip" data-placement="right" title="Zoeken (Ctrl + F)" ng-click="openSearchDialog()"
+              class="btn btn-primary side-menu-button" aria-label="Left Align">
+         <i class="fa fa-search"></i>
+      </button>
+      <button type="button" data-toggle="tooltip" data-placement="right" title="Opslaan (Ctrl + S)" ng-click="SaveChanges()" class="btn btn-primary side-menu-button"
+              aria-label="Left Align">
+         <i class="fa fa-floppy-o"></i>
+      </button>
+      <button type="button" data-toggle="tooltip" data-placement="right" title="Refresh (Ctrl + R)" ng-click="Refresh()" class="btn btn-primary side-menu-button"
+              aria-label="Left Align">
+         <i class="fa fa-refresh"></i>
+      </button>
+      <button type="button" data-toggle="tooltip" data-placement="right" title="Team Toevoegen" class="btn btn-primary side-menu-button"
+              aria-label="Left Align" ng-click="addTeam()">
+         <i class="fa fa-plus"></i>
+      </button>
+      <button type="button" data-toggle="tooltip" data-placement="right" title="Speler Toevoegen" class="btn btn-primary side-menu-button"
+              aria-label="Left Align" ng-click="addPlayer()">
+         <i class="fa fa-user-plus"></i>
+      </button>
+      <button type="button" data-toggle="tooltip" data-placement="right" title="Team volgorde" class="btn btn-primary side-menu-button"
+              aria-label="Left Align" ng-click="SetOrder()">
+         <i class="fa fa-sort"></i>
+      </button>
+      <a href="/tc-app/php/downloadExport.php" type="button" data-toggle="tooltip" data-placement="right" title="Exporteren"
+         class="btn btn-primary side-menu-button" aria-label="Left Align">
+         <i class="fa fa-file-excel-o"></i>
+      </a>
+      <a href="/tc-app/php/Ledenlijst.php" type="button" data-toggle="tooltip" data-placement="right" title="Ledenlijst"
+         class="btn btn-primary side-menu-button" aria-label="Left Align">
+         <i class="fa fa-list-ol"></i>
+      </a>
+      <button type="button" data-toggle="tooltip" data-placement="right" title="Trainingsinformatie" class="btn btn-primary side-menu-button"
+              aria-label="Left Align" ng-click="OpenTrainingScheduleDialog()">
+         <i class="fa fa-calendar"></i>
+      </button>
+      <button type="button" data-toggle="tooltip" data-placement="right" title="Legenda (Ctrl + L)" class="btn btn-primary side-menu-button"
+              aria-label="Left Align" ng-click="isLegendaVisible = !isLegendaVisible">
+         <i class="fa fa-info-circle"></i>
+      </button>
+      <button type="button" data-toggle="tooltip" data-placement="right" title="(Opnieuw) inloggen" class="btn btn-primary side-menu-button"
+              aria-label="Left Align" ng-click="login()">
+         <i class="fa fa-sign-in"></i>
+      </button>
+   </div>
+   <groups ng-if="loginService.isLoggedIn()"></groups>
+   <search-bar ng-show="isSearchBarOpen" class="search-bar"></search-bar>
+   <player ng-show="selectedPlayer != null" class="player"></player>
+   <legenda ng-if="isLegendaVisible" class="legenda"></legenda>
+</body>
+
+</html>

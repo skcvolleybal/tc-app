@@ -1,0 +1,105 @@
+<div
+  class="flex-row"
+  ng-repeat="mapping in playerService.mappings"
+  ng-show="mapping.name == (isTeamsActive?'Teams':'Trainingsgroepen')"
+>
+  <div
+    class="groups-pick-container flex-column"
+    style="margin: 5px; height: 100%; overflow: auto; width: 200px;"
+  >
+    <div class="panel panel-default" style="width: 150px;">
+      <div class="panel-heading">{{ mapping.name }}</div>
+      <ul class="list-group">
+        <li style="list-style-type: none;">
+          <a
+            class="list-group-item"
+            style="padding: 5px 10px; cursor: pointer;"
+            ng-class="[{'list-group-item-info': team.isVisible}]"
+            ng-repeat="team in mapping.data"
+            ng-click="team.isVisible = !team.isVisible"
+          >
+            {{ team.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="flex-row" style="width: 100%; overflow: auto;">
+    <div
+      class="panel panel-default droppable"
+      ng-repeat="team in mapping.data"
+      style="margin: 5px; display: inline-table"
+      ng-show="team.isVisible"
+      team-id="{{ team.id }}"
+    >
+      <div class="panel-heading">
+        {{ team.name }} ({{ team.players.length }})
+        <button
+          type="button"
+          class="btn btn-default btn-sm"
+          ng-show="team.players.length == 0 && team.name != 'Geen Team' && team.name != 'Geen Trainingsgroep'"
+          ng-click="DeleteTeam(team.id)"
+        >
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+
+      <div
+        ng-repeat="player in team.players"
+        class="label draggable flex-row-space-between"
+        player-id="{{ player.id }}"
+        team-id="{{ player.teamId }}"
+        training-id="{{ player.trainingId }}"
+        type-id="{{ player.typeId }}"
+        name="{{ player.name }}"
+        ng-class="GetClassForPosition(player.typeId)"
+        information="{{ player.information }}"
+        style="font-size: 15px; margin:4px; cursor: move;"
+      >
+        <div style="padding: 6px;">
+          {{ player.name }}
+        </div>
+        <div class="btn-group">
+          <div class="flex-row">
+            <div
+              type="button"
+              ng-if="player.information"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="{{ player.information }}"
+              style="cursor: default; padding: 6px;"
+              aria-label="Left Align"
+            >
+              <i class="fa fa-info-circle"></i>
+            </div>
+            <button
+              type="button"
+              class="btn dropdown-toggle"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              style="background-color: rgba(0,0,0,0)"
+            >
+              <i class="fa fa-chevron-right"></i>
+            </button>
+            <ul class="dropdown-menu" style="font-style: initial;">
+              <li ng-repeat="playerType in dataLists.GetPlayerTypes()">
+                <a href="#" ng-click="ChangePosition(player, playerType)">{{
+                  playerType.name
+                }}</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href="#" ng-click="EditPlayer(player.id)">Wijzigen</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href="#" ng-click="DeletePlayer(player)">Verwijderen</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

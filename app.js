@@ -1,0 +1,1 @@
+angular.module('tcApp', ['ngRoute', 'ngDialog', 'ui-notification']);

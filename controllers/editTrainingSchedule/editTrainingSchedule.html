@@ -1,0 +1,24 @@
+<div class="panel panel-primary">
+   <div class="panel-heading">
+      <h3 class="panel-title">Trainingsinformatie</h3>
+   </div>
+   <div class="panel-body">
+      <div>
+         <div ng-repeat="team in ngDialogData.teams track by $index">
+            <div class="input-group">
+               <span class="input-group-addon">{{team.name}}</span>
+               <input type="text" class="form-control" ng-model="team.trainingInfo" placeholder="Vul hier de trainingsinformatie in">
+            </div>
+         </div>
+      </div>
+      <br />
+      <div class="flex-row-space-between">
+         <button type="button" class="btn btn-default" ng-click="closeThisDialog()">
+            <i class="fa fa-ban" aria-hidden="true"></i> Annuleren
+         </button>
+         <button type="button" class="btn btn-success" ng-click="SaveTrainingInfo()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> Opslaan
+         </button>
+      </div>
+   </div>
+</div>
