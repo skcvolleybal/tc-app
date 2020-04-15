@@ -28,7 +28,7 @@
     <div
       class="panel panel-default droppable"
       ng-repeat="team in mapping.data"
-      style="margin: 5px; display: inline-table"
+      style="margin: 5px; display: inline-table;"
       ng-show="team.isVisible"
       team-id="{{ team.id }}"
     >
@@ -54,7 +54,7 @@
         name="{{ player.name }}"
         ng-class="GetClassForPosition(player.typeId)"
         information="{{ player.information }}"
-        style="font-size: 15px; margin:4px; cursor: move;"
+        style="font-size: 15px; margin: 4px; cursor: move;"
       >
         <div style="padding: 6px;">
           {{ player.name }}
@@ -78,15 +78,15 @@
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-              style="background-color: rgba(0,0,0,0)"
+              style="background-color: rgba(0, 0, 0, 0);"
             >
               <i class="fa fa-chevron-right"></i>
             </button>
             <ul class="dropdown-menu" style="font-style: initial;">
               <li ng-repeat="playerType in dataLists.GetPlayerTypes()">
-                <a href="#" ng-click="ChangePosition(player, playerType)">{{
-                  playerType.name
-                }}</a>
+                <a href="#" ng-click="ChangePosition(player, playerType)"
+                  >{{ playerType.name }}</a
+                >
               </li>
               <li role="separator" class="divider"></li>
               <li>
