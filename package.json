@@ -9,7 +9,7 @@
     "angular-ui-notification": "^0.3.6",
     "bootstrap": "^3.4.1",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng-dialog": "^1.4.0"
   },
   "devDependencies": {},
