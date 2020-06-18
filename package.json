@@ -5,11 +5,11 @@
   "main": "app.js",
   "dependencies": {
     "angular": "^1.8.0",
-    "angular-route": "^1.7.9",
+    "angular-route": "^1.8.0",
     "angular-ui-notification": "^0.3.6",
     "bootstrap": "^3.4.1",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "ng-dialog": "^1.4.0"
   },
   "devDependencies": {},
