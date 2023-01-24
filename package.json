@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "angular": "^1.8.0",
+    "angular": "^1.8.3",
     "angular-route": "^1.8.0",
     "angular-ui-notification": "^0.3.6",
     "bootstrap": "^3.4.1",
@@ -12,7 +12,6 @@
     "jquery": "^3.5.1",
     "ng-dialog": "^1.4.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
