@@ -1,6 +1,8 @@
 <?php
-   error_reporting(E_ALL);
-   ini_set("display_errors", 1);
+   // error_reporting(E_ALL);
+   // ini_set("display_errors", 1);
+
+
 
    require_once("tcapp.class.php");
    require_once("database.class.php");
@@ -11,11 +13,13 @@
    require_once("PlayerFunctions.class.php");
    require_once("ListActions.class.php");
    require_once("ChangeFunctions.class.php");
-
+ 
    try {
+      
       $database = new Database();
+      
       $tcApp = new TcApp($database);
-   
+      
       $tcApp->InitJoomla();
 
       $postObject = $tcApp->getPostedJsonValues();
