@@ -1,79 +1,86 @@
 <?php
 // error_reporting(E_ALL);
-ini_set("display_errors", 0);
+// ini_set("display_errors", 0);
 
 require_once("database.class.php");
 require_once("tcapp.class.php");
-require_once("./../libs/PHPExcel/Classes/PHPExcel.php");
+
 
 class LedenLijst
 {
    private $database;
-   private $objPHPExcel;
+
 
    public function __construct($database)
    {
       $this->database = $database;
    }
 
-   public function CreateDocument()
-   {
-      $this->objPHPExcel = new PHPExcel();
-   }
-
-   function SetBorder($cells)
-   {
-      $styleArray = [
-         'borders' => [
-            'left' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
-            'right' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
-            'bottom' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
-            'top' => ['style' => PHPExcel_Style_Border::BORDER_THIN]
-         ]
-      ];
-
-      $this->objPHPExcel->getActiveSheet()->getStyle($cells)->applyFromArray($styleArray);
-   }
-
-   public function GetCellName($column, $row)
-   {
-      $alphabet = "ABCDEFGHIJKLMONPQRSTUVWXYZ";
-      return $alphabet[$column] . ($row + 1);
-   }
-
-   private function SetCell($cell, $value)
-   {
-      $this->objPHPExcel->getActiveSheet()->setCellValue($cell, $value);
-   }
-
-   private function SetCellBold($cell, $value)
-   {
-      $this->objPHPExcel->getActiveSheet()->setCellValue($cell, $value);
-      $this->objPHPExcel->getActiveSheet()->getStyle($cell)->getFont()->setBold(true);
-   }
-
-   public function ReturnExcelExport()
-   {
-      $objWriter = PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel2007');
-      header('Content-Type: application/vnd.ms-excel');
-      header('Content-Disposition: attachment;filename="TC-ledenlijst.xlsx"');
-      header('Cache-Control: max-age=0');
-      $objWriter->save('php://output');
-   }
-
-   private function AddFilters($range)
-   {
-      $this->objPHPExcel->getActiveSheet()->setAutoFilter($range);
-   }
-
    public function GetLedenlijst()
    {
-      $this->CreateDocument();
 
-      $this->SetCellBold("A1", "Naam");
-      $this->SetCellBold("B1", "Team");
-      $this->SetCellBold("C1", "Trainingsgroep");
-      $this->SetCellBold("D1", "Positie");
+      ?>
+
+      <html>
+         <head>
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+
+         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+
+         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+         <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+         <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+         <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+         <script>
+            $(document).ready(function() {
+    $('#ledenlijst').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "lengthMenu": [1000]
+    } );
+} );
+         </script>
+        
+         </head>
+         <body>
+
+         <div class="container">
+
+         <div class="col-md-12">
+
+        
+
+      <table id="ledenlijst" class="display nowrap" style="width:100%">
+         <thead>
+            <tr>
+               <td>
+                  #
+               </td>
+               <td>
+                  Naam
+               </td>
+               <td>
+                  Team
+               </td>
+               <td>
+                  Trainingsgroep
+               </td>
+               <td>
+                  Positie
+               </td>
+            </tr>
+         </thead>
+         <tbody>
+            
+
+      <?php
 
       $query = "select 
                      P.name, 
@@ -86,21 +93,47 @@ class LedenLijst
                    left join tcapp_player_types PT on P.type_id = PT.id
                    order by T1.sequence, P.name";
       $result = $this->database->executeQuery($query);
-      $counter = 1;
+      $counter = 0; 
+
       foreach ($result as $row) {
-         $this->SetCell($this->GetCellName(0, $counter), $row['name']);
-         $this->SetCell($this->GetCellName(1, $counter), $row['team']);
-         $this->SetCell($this->GetCellName(2, $counter), $row['training']);
-         $this->SetCell($this->GetCellName(3, $counter), $row['type']);
-
          $counter++;
-      }
+         ?>
 
-      $this->AddFilters('A1:D1');
+         <tr>    
 
-      foreach (range('A', 'D') as $columnID) {
-         $this->objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+         <td>
+         <?php echo $counter; ?>
+         </td>
+         <td>
+            <?php echo $row['name']; ?>
+         </td>
+         <td>
+         <?php echo $row['team']; ?>
+         </td>
+         <td>
+         <?php echo $row['training']; ?>
+         </td>
+         <td>
+         <?php echo $row['type']; ?>
+         </td>
+         
+
+
+         </tr>
+         <?php 
       }
+      ?>
+
+</div>
+         </div>
+
+      </tbody>
+      </table>
+      </body>
+      </html>
+
+ 
+      <?php
    }
 }
 
@@ -114,4 +147,4 @@ $tcApp->CheckForTcRights($user);
 $excelExport = new LedenLijst($database);
 
 $excelExport->GetLedenlijst();
-$excelExport->ReturnExcelExport();
+
