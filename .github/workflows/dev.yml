@@ -2,7 +2,7 @@ on:
   push: 
     branches: 
       - dev
-name: 🚀 Deploy scripts to test on Antagonist (test.skcvolleybal.nl/tc-app)
+name: 🚀 When dev branch is updated, deploy to test (test.skcvolleybal.nl/public_html/tc-app)
 jobs:
   web-deploy:
     name: 🎉 Deploy

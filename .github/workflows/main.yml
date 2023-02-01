@@ -1,20 +1,20 @@
-# on: 
-#   push: 
-#     branches: 
-#       - main
-# name: 🚀 Deploy TC-app to production on Antagonist (skcvolleybal.nl/tc-app)
-# jobs:
-#   web-deploy:
-#     name: 🎉 Deploy
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: 🚚 Get latest code
-#       uses: actions/checkout@v2
+on: 
+  push: 
+    branches: 
+      - main
+name: 🚀 When main branch is updated, deploy TC-app to production (skcvolleybal.nl/tc-app)
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
     
-#     - name: 📂 Sync files
-#       uses: SamKirkland/FTP-Deploy-Action@4.3.3
-#       with:
-#         server: ftp.skcvolleybal.nl
-#         username: ${{ secrets.ftp_username_disabled }}
-#         password: ${{ secrets.ftp_password_disabled }}
-        # Server-dir not necessary: the FTP account only has rights to write in /public_html/scripts. See webhost control panel for FTP. 
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      with:
+        server: ftp.skcvolleybal.nl
+        username: ${{ secrets.ftp_username_disabled }}
+        password: ${{ secrets.ftp_password_disabled }}
+        Server-dir not necessary: the FTP account only has rights to write in /public_html/scripts. See webhost control panel for FTP. 
