@@ -1,0 +1,20 @@
+on: 
+  push: 
+    branches: 
+      - dev
+name: 🚀 Deploy scripts to test on Antagonist (test.skcvolleybal.nl/tc-app)
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      with:
+        server: ftp.skcvolleybal.nl
+        username: ${{ secrets.test_ftp_username }}
+        password: ${{ secrets.test_ftp_password }}
+        # Server-dir not necessary: the FTP account only has rights to write in test/public_html/scripts. See webhost control panel for FTP. 
