@@ -18,3 +18,11 @@ jobs:
         username: ${{ secrets.test_ftp_username }}
         password: ${{ secrets.test_ftp_password }}
         # Server-dir not necessary: the FTP account only has rights to write in test/public_html/scripts. See webhost control panel for FTP. 
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: whoami
