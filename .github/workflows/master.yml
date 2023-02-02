@@ -1,7 +1,7 @@
 on: 
   push: 
     branches: 
-      - main
+      - master
 name: 🚀 When main branch is updated, deploy TC-app to production (skcvolleybal.nl/tc-app)
 jobs:
   web-deploy:
