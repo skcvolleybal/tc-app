@@ -1,5 +1,5 @@
 # tc-app
-De applicatie voor de TC van SKC
+De applicatie voor de TC van SKC.
 
 # Installation instructions
 0. Ensure Node.js and Node Package Manager are installed
