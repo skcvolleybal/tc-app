@@ -3,7 +3,7 @@ on:
   push: 
     branches: 
       - dev
-name: 🚀 When dev branch is updated, deploy to test (test.skcvolleybal.nl/public_html/tc-app)
+name: 🚀 Deploy TC-app to test (test.skcvolleybal.nl/public_html/tc-app)
 jobs:
   web-deploy:
     name: 🎉 Deploy
