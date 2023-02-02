@@ -14,6 +14,8 @@ jobs:
     - uses: actions/setup-node@master
     - name: Installing project dependencies
       run: npm install
+    - name: Installing PHP dependencies
+      run: composer update --ignore-platform-reqs
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
