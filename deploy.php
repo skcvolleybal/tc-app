@@ -1,1 +1,0 @@
-<?php shell_exec('npm ci') ?>
