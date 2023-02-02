@@ -17,4 +17,4 @@ jobs:
         server: ftp.skcvolleybal.nl
         username: ${{ secrets.ftp_username_disabled }}
         password: ${{ secrets.ftp_password_disabled }}
-        Server-dir not necessary: the FTP account only has rights to write in /public_html/scripts. See webhost control panel for FTP. 
+        # Server-dir not necessary: the FTP account only has rights to write in /public_html/scripts. See webhost control panel for FTP. 
