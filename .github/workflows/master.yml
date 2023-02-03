@@ -1,8 +1,5 @@
 on:
   workflow_dispatch:
-  push: 
-    branches: 
-      - master
 name: 🚀 Deploy TC-app to production (skcvolleybal.nl/tc-app)
 jobs:
   web-deploy:
