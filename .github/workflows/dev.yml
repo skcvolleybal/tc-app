@@ -2,11 +2,11 @@ on:
   workflow_dispatch:
   push: 
     branches: 
-      - dev
-name: 🚀 Deploy TC-app to test (test.skcvolleybal.nl/public_html/tc-app)
+      - "*"
+name: 🧪 Deploy TC-app to test
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: 🧪 Deploy TC-app to test environment
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
