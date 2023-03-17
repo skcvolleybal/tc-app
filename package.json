@@ -10,6 +10,8 @@
     "bootstrap": "^3.4.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
+    "jquery-ui": "^1.13.2",
+    "jquery-ui-bundle.1.12.1": "^1.12.1",
     "ng-dialog": "^1.4.0"
   },
   "scripts": {
