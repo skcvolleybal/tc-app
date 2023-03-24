@@ -3,6 +3,11 @@
    // ini_set("display_errors", 1);
 
 
+   require __DIR__ . '../vendor.autoload.php';
+
+     \Sentry\init(['dsn' => 'https://45df5d88f1084fcd96c8ae9fa7db50c7@o4504883122143232.ingest.sentry.io/4504883124240384',
+  'environment' => $env->Environment ]);
+
 
    require_once("tcapp.class.php");
    require_once("database.class.php");
@@ -13,8 +18,11 @@
    require_once("PlayerFunctions.class.php");
    require_once("ListActions.class.php");
    require_once("ChangeFunctions.class.php");
+
+
  
    try {
+      
       
       $database = new Database();
       
