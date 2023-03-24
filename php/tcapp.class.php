@@ -1,15 +1,29 @@
 <?php
+require '../vendor/autoload.php';
+
+
 class TcApp
 {
+
    public function InitJoomla()
    {
+
+
+      
       define('_JEXEC', 1);
 
       define('JPATH_BASE', realpath(__DIR__ . '/../..'));
 
       require_once(JPATH_BASE . '/includes/defines.php');
       require_once(JPATH_BASE . '/includes/framework.php');
+      $env = json_decode(file_get_contents("../../../env.json"));
+
       $mainframe = JFactory::getApplication('site');
+
+      
+      \Sentry\init(['dsn' => 'https://087b634fd12e49fd80fdb70d4d272f3e@o4504883122143232.ingest.sentry.io/4504884671676416',
+   'environment' => $env->Environment ]);
+
       $mainframe->initialise();
    }
 
