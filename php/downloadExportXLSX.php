@@ -115,11 +115,24 @@ class ExportXLSX
       return $teams;
    }
 
+   public function drawLegenda () {
+      //  Banda 
+   }
+
    public function DrawPlayers($teams)
    {
-      //draw players
+      // Bas
 
    }
+
+   public function drawTrainingsgroepen ($trainingsgroepen) {
+      // Koen
+ 
+   }
+
+
+
+
 }
 
 $database = new Database();
