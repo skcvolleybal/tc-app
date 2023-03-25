@@ -17,13 +17,12 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class ExportXLSX
 {
 
-    public function __construct()
+    public function __construct($database)
     {
-        $this->createExcel();
+        $this->database = $database;
     }
 
-
-    public static function createExcel( $fileName = 'data.xlsx')
+    public function getExcelExport()
     {
         $spreadsheet = new Spreadsheet();
         $sheet1 = new Worksheet($spreadsheet, 'Teams');
@@ -34,14 +33,39 @@ class ExportXLSX
 
         //gooi data in teams
         $spreadsheet->setActiveSheetIndex(0);
-        $sheet1 = $spreadsheet->getActiveSheet();
-        $sheet1->getCell('A1')->setValue('Teams');
 
+        $query = "select 
+                      T.id as teamId,
+                      T.name as teamName,
+                      T.training_info as trainingInfo,
+                      P.name as name,
+                      PT.name as type
+                   from tcapp_players P
+                   left join tcapp_teams T on T.id = P.team_id
+                   left join tcapp_player_types PT on P.type_id = PT.id
+                   where T.type = 'team'
+                   order by sequence, PT.id, P.name";
+
+        //$teams = $this->GetTeams($query);
+        //$this->DrawPlayers($teams);
 
         //gooi data in trainingsgroepen
         $spreadsheet->setActiveSheetIndex(1);
-        $sheet2 = $spreadsheet->getActiveSheet();
-        $sheet2->getCell('A1')->setValue('Trainingsgroepen');
+       
+        $query = "select 
+                     T.id as teamId,
+                     T.name as teamName,
+                     P.name as name,
+                     T.training_info as trainingInfo,
+                     PT.name as type
+                   from tcapp_players P
+                   left join tcapp_teams T on T.id = P.training_id
+                   left join tcapp_player_types PT on P.type_id = PT.id
+                   where T.type = 'training'
+                   order by sequence, PT.id, P.name";
+
+        //$teams = $this->GetTeams($query);
+        //$this->DrawPlayers($teams);
 
         //gooi originele worksheet eruit
         $spreadsheet->setActiveSheetIndex(2);
@@ -49,17 +73,51 @@ class ExportXLSX
         $spreadsheet->removeSheetByIndex($sheetIndex);
 
         //spring terug naar de Teams tab als beginpunt
-        $spreadsheet->setActiveSheetIndex(0);
+        $spreadsheet->setActiveSheetIndex(0)->setSelectedCell("A1");
 
         $writer = new Xlsx($spreadsheet);
         ob_end_clean();
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="'. urlencode($fileName).'"');
+        header('Content-Disposition: attachment; filename="TC-indeling.xlsx"');
         $writer->save('php://output');
-
-        
     }
+
+   public function GetTeams($query)
+   {
+      $result = $this->database->executeQuery($query);
+
+      $currentTeamId = -1;
+
+      $teams = [];
+      $counter = -1;
+      foreach ($result as $player) {
+         $teamId = $player['teamId'];
+         if ($teamId != $currentTeamId) {
+            $currentTeamId = $teamId;
+            $counter++;
+            $teams[] = [
+               'id' => $player['teamId'],
+               'name' => $player['teamName'],
+               'trainingInfo' => $player['trainingInfo'],
+               'players' => []
+            ];
+         }
+         $teams[$counter]['players'][] = [
+            "name" => $player['name'],
+            "type" => $player['type']
+         ];
+      }
+
+      return $teams;
+   }
 
 }
 
-$exportxlsx = new ExportXLSX;
+$database = new Database();
+
+$tcApp = new TcApp();
+$user = $tcApp->GetUser();
+$tcApp->CheckForTcRights($user);
+
+$exportxlsx = new ExportXLSX($database);
+$exportxlsx->getExcelExport();
