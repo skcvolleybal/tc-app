@@ -10,7 +10,7 @@ require '../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 ?>
 
 <?php
@@ -26,13 +26,27 @@ class ExportXLSX
     public static function createExcel( $fileName = 'data.xlsx')
     {
         $spreadsheet = new Spreadsheet();
-        // Create a new worksheet called "My Data"
-        $myWorkSheet = new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadsheet, 'My Data');
-
-        // Attach the "My Data" worksheet as the first worksheet in the Spreadsheet object
+        $myWorkSheet = new Worksheet($spreadsheet, 'Teams');
         $spreadsheet->addSheet($myWorkSheet, 0);
+    
+        $myWorkSheet2 = new Worksheet($spreadsheet, 'Trainingsgroepen');
+        $spreadsheet->addSheet($myWorkSheet2, 1);
+
+        //gooi data in teams
+        $spreadsheet->setActiveSheetIndex(0);
         $myWorkSheet = $spreadsheet->getActiveSheet();
-        $myWorkSheet->getCell('A1')->setValue('Hello world!');
+        $myWorkSheet->getCell('A1')->setValue('Teams');
+
+
+        //gooi data in trainingsgroepen
+        $spreadsheet->setActiveSheetIndex(1);
+        $myWorkSheet2 = $spreadsheet->getActiveSheet();
+        $myWorkSheet2->getCell('A1')->setValue('Trainingsgroepen');
+
+        //gooi originele worksheet eruit
+        $spreadsheet->setActiveSheetIndex(2);
+        $sheetIndex = $spreadsheet->getActiveSheetIndex();
+        $spreadsheet->removeSheetByIndex($sheetIndex);
 
         $writer = new Xlsx($spreadsheet);
         ob_end_clean();
