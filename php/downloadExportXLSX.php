@@ -26,14 +26,21 @@ class ExportXLSX
     public static function createExcel( $fileName = 'data.xlsx')
     {
         $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Hello World !');
-        
+        // Create a new worksheet called "My Data"
+        $myWorkSheet = new \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadsheet, 'My Data');
+
+        // Attach the "My Data" worksheet as the first worksheet in the Spreadsheet object
+        $spreadsheet->addSheet($myWorkSheet, 0);
+        $myWorkSheet = $spreadsheet->getActiveSheet();
+        $myWorkSheet->getCell('A1')->setValue('Hello world!');
+
         $writer = new Xlsx($spreadsheet);
         ob_end_clean();
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="'. urlencode($fileName).'"');
         $writer->save('php://output');
+
+        
     }
 
 }
