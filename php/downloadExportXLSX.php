@@ -17,6 +17,9 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class ExportXLSX
 {
 
+    private $database;
+    private $spreadsheetobject;
+
     public function __construct($database)
     {
         $this->database = $database;
@@ -25,6 +28,7 @@ class ExportXLSX
     public function getExcelExport()
     {
         $spreadsheet = new Spreadsheet();
+        $this->spreadsheetobject = $spreadsheet;
         $sheet1 = new Worksheet($spreadsheet, 'Teams');
         $spreadsheet->addSheet($sheet1, 0);
     
@@ -111,13 +115,14 @@ class ExportXLSX
       return $teams;
    }
 
+   public function DrawPlayers($teams)
+   {
+      //draw players
+
+   }
 }
 
 $database = new Database();
-
-$tcApp = new TcApp();
-$user = $tcApp->GetUser();
-$tcApp->CheckForTcRights($user);
 
 $exportxlsx = new ExportXLSX($database);
 $exportxlsx->getExcelExport();
