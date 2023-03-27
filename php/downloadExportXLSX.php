@@ -18,14 +18,14 @@ class ExportXLSX
 {
 
     private $database;
-    private $spreadsheetobject;
+    public $spreadsheetobject;
 
     public function __construct($database)
     {
         $this->database = $database;
     }
 
-    public function getExcelExport()
+    public function makeExcelExport()
     {
         $spreadsheet = new Spreadsheet();
         $this->spreadsheetobject = $spreadsheet;
@@ -38,6 +38,7 @@ class ExportXLSX
         //gooi data in teams
         $spreadsheet->setActiveSheetIndex(0);
 
+      //   Players query
         $query = "select 
                       T.id as teamId,
                       T.name as teamName,
@@ -51,25 +52,16 @@ class ExportXLSX
                    order by sequence, PT.id, P.name";
 
         //$teams = $this->GetTeams($query);
-        //$this->DrawPlayers($teams);
+        //$this->drawPlayers($teams);
 
         //gooi data in trainingsgroepen
         $spreadsheet->setActiveSheetIndex(1);
-       
-        $query = "select 
-                     T.id as teamId,
-                     T.name as teamName,
-                     P.name as name,
-                     T.training_info as trainingInfo,
-                     PT.name as type
-                   from tcapp_players P
-                   left join tcapp_teams T on T.id = P.training_id
-                   left join tcapp_player_types PT on P.type_id = PT.id
-                   where T.type = 'training'
-                   order by sequence, PT.id, P.name";
 
-        //$teams = $this->GetTeams($query);
-        //$this->DrawPlayers($teams);
+        $this->drawLegenda();
+        $this->drawPlayers();
+        $this->drawTrainingsgroepen();
+
+      //   $this->drawPlayers($teams);
 
         //gooi originele worksheet eruit
         $spreadsheet->setActiveSheetIndex(2);
@@ -85,6 +77,42 @@ class ExportXLSX
         header('Content-Disposition: attachment; filename="TC-indeling.xlsx"');
         $writer->save('php://output');
     }
+
+   public function drawLegenda () {
+      //  Banda 
+   }
+
+   public function drawPlayers()
+   {
+      // Bas
+      
+
+   }
+
+   public function drawTrainingsgroepen () {
+      // Koen
+      // Get the trainingsgroepen from the database
+      $trainingsgroepquery = "select 
+         T.id as teamId,
+         T.name as teamName,
+         P.name as name,
+         T.training_info as trainingInfo,
+         PT.name as type
+         from tcapp_players P
+         left join tcapp_teams T on T.id = P.training_id
+         left join tcapp_player_types PT on P.type_id = PT.id
+         where T.type = 'training'
+         order by sequence, PT.id, P.name";
+
+      $trainingsgroepen = $this->GetTeams($trainingsgroepquery);
+
+      // Draw the trainingsgroepen on the worksheet
+      $this->spreadsheetobject;
+
+
+
+ 
+   }
 
    public function GetTeams($query)
    {
@@ -115,24 +143,6 @@ class ExportXLSX
       return $teams;
    }
 
-   public function drawLegenda () {
-      //  Banda 
-   }
-
-   public function DrawPlayers($teams)
-   {
-      // Bas
-
-   }
-
-   public function drawTrainingsgroepen ($trainingsgroepen) {
-      // Koen
- 
-   }
-
-
-
-
 }
 
 $database = new Database();
@@ -148,4 +158,4 @@ $tcApp->CheckForTcRights($user);
 
 
 $exportxlsx = new ExportXLSX($database);
-$exportxlsx->getExcelExport();
+$exportxlsx->makeExcelExport();
