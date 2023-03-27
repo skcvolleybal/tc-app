@@ -137,5 +137,15 @@ class ExportXLSX
 
 $database = new Database();
 
+$tcApp = new TcApp();
+$tcApp->InitJoomla();
+
+// Only logged in users can access this page
+$user = $tcApp->GetUser();
+
+// Only TC members can download this Excel file 
+$tcApp->CheckForTcRights($user);
+
+
 $exportxlsx = new ExportXLSX($database);
 $exportxlsx->getExcelExport();
