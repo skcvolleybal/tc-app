@@ -14,7 +14,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class ExcelExport
 {
    private $database;
-   private $objPHPExcel;
+   private $objPHPSpreadsheet;
 
    private $playerTypes = [
       "Spelverdeler" =>  ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'd9534f']], 'font' => ['color' => ['argb' => 'FFFFFF']]],
@@ -35,7 +35,7 @@ class ExcelExport
 
    public function CreateDocument()
    {
-      $this->objPHPExcel = new Spreadsheet();
+      $this->objPHPSpreadsheet = new Spreadsheet();
    }
 
    function SetBorder($cells)
@@ -49,7 +49,7 @@ class ExcelExport
          ]
       ];
 
-      $this->objPHPExcel->getActiveSheet()->getStyle($cells)->applyFromArray($styleArray);
+      $this->objPHPSpreadsheet->getActiveSheet()->getStyle($cells)->applyFromArray($styleArray);
    }
 
    public function SetPlayer($column, $row, $name, $playerType)
@@ -67,35 +67,35 @@ class ExcelExport
 
    private function SetCell($cell, $value)
    {
-      $this->objPHPExcel->getActiveSheet()->setCellValue($cell, $value);
+      $this->objPHPSpreadsheet->getActiveSheet()->setCellValue($cell, $value);
    }
 
    private function SetCellBold($cell, $value)
    {
-      $this->objPHPExcel->getActiveSheet()->setCellValue($cell, $value);
-      $this->objPHPExcel->getActiveSheet()->getStyle($cell)->getFont()->setBold(true);
+      $this->objPHPSpreadsheet->getActiveSheet()->setCellValue($cell, $value);
+      $this->objPHPSpreadsheet->getActiveSheet()->getStyle($cell)->getFont()->setBold(true);
    }
 
    private function SetCellItalic($cell, $value)
    {
-      $this->objPHPExcel->getActiveSheet()->setCellValue($cell, $value);
-      $this->objPHPExcel->getActiveSheet()->getStyle($cell)->getFont()->setItalic(true);
+      $this->objPHPSpreadsheet->getActiveSheet()->setCellValue($cell, $value);
+      $this->objPHPSpreadsheet->getActiveSheet()->getStyle($cell)->getFont()->setItalic(true);
    }
 
    private function SetFontSize($cell, $size)
    {
-      $this->objPHPExcel->getActiveSheet()->getStyle($cell)->getFont()->setSize($size);
+      $this->objPHPSpreadsheet->getActiveSheet()->getStyle($cell)->getFont()->setSize($size);
    }
 
    private function PaintCell($cell, $type)
    {
-      $this->objPHPExcel->getActiveSheet()->getStyle($cell)->applyFromArray($this->playerTypes[$type]);
+      $this->objPHPSpreadsheet->getActiveSheet()->getStyle($cell)->applyFromArray($this->playerTypes[$type]);
    }
 
    private function DrawLegenda()
    {
       $this->SetCell("A1", "Legenda");
-      $this->objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true)->setItalic(true)->setUnderline(true);
+      $this->objPHPSpreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true)->setItalic(true)->setUnderline(true);
 
       $this->SetCell("A2", "Spelverdeler");
       $this->PaintCell("A2", "Spelverdeler");
@@ -199,17 +199,16 @@ class ExcelExport
       }
 
       foreach (range('A', 'C') as $columnID) {
-         $this->objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+         $this->objPHPSpreadsheet->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
       }
    }
 
    public function GetExcelExport()
    {
-      // require_once dirname(__FILE__) . '/../libs/PHPExcel/Classes/PHPExcel.php';
 
       $this->CreateDocument();
 
-      $this->objPHPExcel->getProperties()
+      $this->objPHPSpreadsheet->getProperties()
          ->setCreator("Technische Commissie SKC")
          ->setTitle("TC indeling")
          ->setDescription("Teamindeling voor het aankomende volleybal seizoen.")
@@ -248,28 +247,28 @@ class ExcelExport
       $teams = $this->GetTeams($query);
       $this->DrawPlayers($teams);
 
-      $this->objPHPExcel->setActiveSheetIndex(0)->setSelectedCell("A1");
+      $this->objPHPSpreadsheet->setActiveSheetIndex(0)->setSelectedCell("A1");
    }
 
    private function SetSheetName($name)
    {
-      $this->objPHPExcel->getActiveSheet()->setTitle($name);
+      $this->objPHPSpreadsheet->getActiveSheet()->setTitle($name);
    }
 
    private function CreateNewSheet()
    {
-      $this->objPHPExcel->createSheet();
+      $this->objPHPSpreadsheet->createSheet();
    }
 
    private function SetActiveSheet($index)
    {
-      $this->objPHPExcel->setActiveSheetIndex($index);
+      $this->objPHPSpreadsheet->setActiveSheetIndex($index);
    }
 
    public function returnExcelExport()
    {
 
-      $writer = new Xlsx($this->objPHPExcel);
+      $writer = new Xlsx($this->objPHPSpreadsheet);
       ob_end_clean();
       header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
       header('Content-Disposition: attachment; filename="TC-indeling '  . date("d-m-Y") .   '.xlsx"');
