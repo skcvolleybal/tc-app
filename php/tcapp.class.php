@@ -44,7 +44,7 @@ class TcApp
       }
       // only allow TC members
       if (!array_key_exists(46, $user->{'groups'})) {
-         throw new Exception("Je hebt niet de benodigde rechten");
+         throw new Exception("Je hebt niet de benodigde rechten, " . $user->name);
       }
    }
 
