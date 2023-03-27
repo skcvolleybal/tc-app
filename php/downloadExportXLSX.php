@@ -4,6 +4,7 @@
 
 require_once("database.class.php");
 require_once("tcapp.class.php");
+// require_once("./../libs/PHPExcel/Classes/PHPExcel.php");
 
 require '../vendor/autoload.php';
 
@@ -11,107 +12,121 @@ require '../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-?>
 
-<?php
-class ExportXLSX
+class ExcelExport
 {
+   private $database;
+   private $objPHPExcel;
 
-    private $database;
-    public $spreadsheetobject;
+   private $playerTypes = [
+      "Spelverdeler" =>  ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'd9534f']], 'font' => ['color' => ['argb' => 'FFFFFF']]],
+      "Midden" =>        ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '5cb85c']], 'font' => ['color' => ['argb' => 'FFFFFF']]],
+      "Passer-loper" =>  ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'f0ad4e']], 'font' => ['color' => ['argb' => 'FFFFFF']]],
+      "Diagonaal" =>     ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '5bc0de']], 'font' => ['color' => ['argb' => 'FFFFFF']]],
+      "Libero" =>        ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '337ab7']], 'font' => ['color' => ['argb' => 'FFFFFF']]],
+      "Trainingslid" =>  ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'f5f5f5']], 'font' => ['color' => ['argb' => '808080']]],
+      "Interesse"    =>  ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'FFFFFF']], 'font' => ['color' => ['argb' => '5e5e5e'], 'italic' => true]],
+      "Nog Niets" =>     ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '777777']], 'font' => ['color' => ['argb' => 'FFFFFF']]],
+      "Uitgeschreven" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]]
+   ];
 
-    public function __construct($database)
-    {
-        $this->database = $database;
-    }
-
-    public function makeExcelExport()
-    {
-        $spreadsheet = new Spreadsheet();
-        $this->spreadsheetobject = $spreadsheet;
-        $sheet1 = new Worksheet($spreadsheet, 'Teams');
-        $spreadsheet->addSheet($sheet1, 0);
-    
-        $sheet2 = new Worksheet($spreadsheet, 'Trainingsgroepen');
-        $spreadsheet->addSheet($sheet2, 1);
-
-        //gooi data in teams
-        $spreadsheet->setActiveSheetIndex(0);
-
-      //   Players query
-        $query = "select 
-                      T.id as teamId,
-                      T.name as teamName,
-                      T.training_info as trainingInfo,
-                      P.name as name,
-                      PT.name as type
-                   from tcapp_players P
-                   left join tcapp_teams T on T.id = P.team_id
-                   left join tcapp_player_types PT on P.type_id = PT.id
-                   where T.type = 'team'
-                   order by sequence, PT.id, P.name";
-
-        //$teams = $this->GetTeams($query);
-        //$this->drawPlayers($teams);
-
-        //gooi data in trainingsgroepen
-        $spreadsheet->setActiveSheetIndex(1);
-
-        $this->drawLegenda();
-        $this->drawPlayers();
-        $this->drawTrainingsgroepen();
-
-      //   $this->drawPlayers($teams);
-
-        //gooi originele worksheet eruit
-        $spreadsheet->setActiveSheetIndex(2);
-        $sheetIndex = $spreadsheet->getActiveSheetIndex();
-        $spreadsheet->removeSheetByIndex($sheetIndex);
-
-        //spring terug naar de Teams tab als beginpunt
-        $spreadsheet->setActiveSheetIndex(0)->setSelectedCell("A1");
-
-        $writer = new Xlsx($spreadsheet);
-        ob_end_clean();
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="TC-indeling.xlsx"');
-        $writer->save('php://output');
-    }
-
-   public function drawLegenda () {
-      //  Banda 
-   }
-
-   public function drawPlayers()
+   public function __construct($database)
    {
-      // Bas
-      
-
+      $this->database = $database;
    }
 
-   public function drawTrainingsgroepen () {
-      // Koen
-      // Get the trainingsgroepen from the database
-      $trainingsgroepquery = "select 
-         T.id as teamId,
-         T.name as teamName,
-         P.name as name,
-         T.training_info as trainingInfo,
-         PT.name as type
-         from tcapp_players P
-         left join tcapp_teams T on T.id = P.training_id
-         left join tcapp_player_types PT on P.type_id = PT.id
-         where T.type = 'training'
-         order by sequence, PT.id, P.name";
+   public function CreateDocument()
+   {
+      $this->objPHPExcel = new Spreadsheet();
+   }
 
-      $trainingsgroepen = $this->GetTeams($trainingsgroepquery);
+   function SetBorder($cells)
+   {
+      $styleArray = [
+         'borders' => [
+            'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+            'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+            'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+            'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
+         ]
+      ];
 
-      // Draw the trainingsgroepen on the worksheet
-      $this->spreadsheetobject;
+      $this->objPHPExcel->getActiveSheet()->getStyle($cells)->applyFromArray($styleArray);
+   }
 
+   public function SetPlayer($column, $row, $name, $playerType)
+   {
+      $cell = $this->GetCellName($column, $row);
+      $this->SetCell($cell, $name);
+      $this->PaintCell($cell, $playerType);
+   }
 
+   public function GetCellName($column, $row)
+   {
+      $alphabet = "ABCDEFGHIJKLMONPQRSTUVWXYZ";
+      return $alphabet[$column] . ($row + 1);
+   }
 
- 
+   private function SetCell($cell, $value)
+   {
+      $this->objPHPExcel->getActiveSheet()->setCellValue($cell, $value);
+   }
+
+   private function SetCellBold($cell, $value)
+   {
+      $this->objPHPExcel->getActiveSheet()->setCellValue($cell, $value);
+      $this->objPHPExcel->getActiveSheet()->getStyle($cell)->getFont()->setBold(true);
+   }
+
+   private function SetCellItalic($cell, $value)
+   {
+      $this->objPHPExcel->getActiveSheet()->setCellValue($cell, $value);
+      $this->objPHPExcel->getActiveSheet()->getStyle($cell)->getFont()->setItalic(true);
+   }
+
+   private function SetFontSize($cell, $size)
+   {
+      $this->objPHPExcel->getActiveSheet()->getStyle($cell)->getFont()->setSize($size);
+   }
+
+   private function PaintCell($cell, $type)
+   {
+      $this->objPHPExcel->getActiveSheet()->getStyle($cell)->applyFromArray($this->playerTypes[$type]);
+   }
+
+   private function DrawLegenda()
+   {
+      $this->SetCell("A1", "Legenda");
+      $this->objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true)->setItalic(true)->setUnderline(true);
+
+      $this->SetCell("A2", "Spelverdeler");
+      $this->PaintCell("A2", "Spelverdeler");
+
+      $this->SetCell("A3", "Midden");
+      $this->PaintCell("A3", "Midden");
+
+      $this->SetCell("A4", "Passer-loper");
+      $this->PaintCell("A4", "Passer-loper");
+
+      $this->SetCell("A5", "Diagonaal");
+      $this->PaintCell("A5", "Diagonaal");
+
+      $this->SetCell("A6", "Libero");
+      $this->PaintCell("A6", "Libero");
+
+      $this->SetCell("A7", "Nog Niets");
+      $this->PaintCell("A7", "Nog Niets");
+
+      $this->SetCell("A8", "Trainingslid");
+      $this->PaintCell("A8", "Trainingslid");
+
+      $this->SetCell("A9", "Interesse");
+      $this->PaintCell("A9", "Interesse");
+
+      $this->SetCell("A10", "Uitgeschreven");
+      $this->PaintCell("A10", "Uitgeschreven");
+
+      $this->SetBorder("A2:A10");
    }
 
    public function GetTeams($query)
@@ -143,19 +158,136 @@ class ExportXLSX
       return $teams;
    }
 
+   private function DrawPlayers($teams)
+   {
+      $this->DrawLegenda();
+
+      $baseRow = count($this->playerTypes) + 2;
+      $baseColumn = 0;
+      $maxRows = 0;
+
+      foreach ($teams as $team) {
+         $currentRow = $baseRow;
+
+         $cell = $this->GetCellName($baseColumn, $currentRow++);
+         $teamTitle = $team['name'] . " (" . count($team['players']) . ")";
+         $this->SetCellBold($cell, $teamTitle);
+
+         $trainingInfo = $team['trainingInfo'];
+         $cell = $this->GetCellName($baseColumn, $currentRow++);
+         $this->setCell($cell, $trainingInfo);
+         $this->SetFontSize($cell, 8);
+
+         foreach ($team['players'] as $player) {
+            $this->SetPlayer($baseColumn, $currentRow++, $player['name'], $player['type']);
+
+            if ($maxRows < $currentRow) {
+               $maxRows = $currentRow;
+            }
+         }
+
+         $cellTop = $this->GetCellName($baseColumn, $baseRow + 2);
+         $cellBottom = $this->GetCellName($baseColumn, $currentRow - 1);
+
+         $this->SetBorder($cellTop . ":" . $cellBottom);
+
+         $baseColumn++;
+
+         if ($baseColumn > 2) {
+            $baseColumn = 0;
+            $baseRow = $maxRows + 2;
+            $maxRows = 0;
+         }
+      }
+
+      foreach (range('A', 'C') as $columnID) {
+         $this->objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+      }
+   }
+
+   public function GetExcelExport()
+   {
+      // require_once dirname(__FILE__) . '/../libs/PHPExcel/Classes/PHPExcel.php';
+
+      $this->CreateDocument();
+
+      $this->objPHPExcel->getProperties()
+         ->setCreator("Technische Commissie SKC")
+         ->setTitle("TC indeling")
+         ->setDescription("Teamindeling voor het aankomende volleybal seizoen.")
+         ->setKeywords("TC teamindeling SKC volleybal");
+
+      $query = "select 
+                      T.id as teamId,
+                      T.name as teamName,
+                      T.training_info as trainingInfo,
+                      P.name as name,
+                      PT.name as type
+                   from tcapp_players P
+                   left join tcapp_teams T on T.id = P.team_id
+                   left join tcapp_player_types PT on P.type_id = PT.id
+                   where T.type = 'team'
+                   order by sequence, PT.id, P.name";
+
+      $this->SetSheetName("Teamindeling");
+      $teams = $this->GetTeams($query);
+      $this->DrawPlayers($teams);
+
+      $query = "select 
+                      T.id as teamId,
+                      T.name as teamName,
+                      P.name as name,
+                      T.training_info as trainingInfo,
+                      PT.name as type
+                   from tcapp_players P
+                   left join tcapp_teams T on T.id = P.training_id
+                   left join tcapp_player_types PT on P.type_id = PT.id
+                   where T.type = 'training'
+                   order by sequence, PT.id, P.name";
+      $this->CreateNewSheet();
+      $this->SetActiveSheet(1);
+      $this->SetSheetName("Trainingsgroepen");
+      $teams = $this->GetTeams($query);
+      $this->DrawPlayers($teams);
+
+      $this->objPHPExcel->setActiveSheetIndex(0)->setSelectedCell("A1");
+   }
+
+   private function SetSheetName($name)
+   {
+      $this->objPHPExcel->getActiveSheet()->setTitle($name);
+   }
+
+   private function CreateNewSheet()
+   {
+      $this->objPHPExcel->createSheet();
+   }
+
+   private function SetActiveSheet($index)
+   {
+      $this->objPHPExcel->setActiveSheetIndex($index);
+   }
+
+   public function returnExcelExport()
+   {
+
+      $writer = new Xlsx($this->objPHPExcel);
+      ob_end_clean();
+      header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      header('Content-Disposition: attachment; filename="TC-indeling.xlsx"');
+      $writer->save('php://output');
+
+   }
 }
 
 $database = new Database();
 
 $tcApp = new TcApp();
 $tcApp->InitJoomla();
-
-// Only logged in users can access this page
 $user = $tcApp->GetUser();
-
-// Only TC members can download this Excel file 
 $tcApp->CheckForTcRights($user);
 
+$excelExport = new ExcelExport($database);
 
-$exportxlsx = new ExportXLSX($database);
-$exportxlsx->makeExcelExport();
+$excelExport->GetExcelExport();
+$excelExport->returnExcelExport();
