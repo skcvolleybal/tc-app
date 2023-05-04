@@ -1,11 +1,15 @@
 {
     "require": {
         "phpoffice/phpspreadsheet": "^1.23",
-        "sentry/sdk": "^3.3"
+        "sentry/sdk": "^3.3",
+        "vlucas/phpdotenv": "^5.5"
     },
     "config": {
         "platform": {
             "php": "8.0"
+        },
+        "allow-plugins": {
+            "php-http/discovery": true
         }
     }
 }
