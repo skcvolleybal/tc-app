@@ -1,13 +1,25 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 require '../vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
-$dotenv->load();
+use Dotenv\Dotenv;
+use Dotenv\Exception\InvalidPathException;
+
 
 class TcApp
 {
-
+   public function __construct() {
+      try {
+         $dotenv = Dotenv::createImmutable(dirname(__DIR__));
+         $dotenv->load();
+      } catch (InvalidPathException $e) {
+         $this->returnError ("Could not find the .env file!");
+      }
+   }
+   
    public function InitJoomla()
    {
 
