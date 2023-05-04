@@ -1,7 +1,8 @@
 <?php
+
 require '../vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
 class TcApp
@@ -12,7 +13,7 @@ class TcApp
 
       define('_JEXEC', 1);
 
-      define('JPATH_BASE', realpath(__DIR__ . '/../..'));
+      define('JPATH_BASE', $_ENV['JPATH_BASE']);
 
       require_once(JPATH_BASE . '/includes/defines.php');
       require_once(JPATH_BASE . '/includes/framework.php');
