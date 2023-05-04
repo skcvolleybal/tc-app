@@ -1,28 +1,39 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 require '../vendor/autoload.php';
+
+use Dotenv\Dotenv;
+use Dotenv\Exception\InvalidPathException;
 
 
 class TcApp
 {
-
+   public function __construct() {
+      try {
+         $dotenv = Dotenv::createImmutable(dirname(__DIR__));
+         $dotenv->load();
+      } catch (InvalidPathException $e) {
+         $this->returnError ("Could not find the .env file!");
+      }
+   }
+   
    public function InitJoomla()
    {
 
-
-      
       define('_JEXEC', 1);
 
-      define('JPATH_BASE', realpath(__DIR__ . '/../..'));
+      define('JPATH_BASE', $_ENV['JPATH_BASE']);
 
       require_once(JPATH_BASE . '/includes/defines.php');
       require_once(JPATH_BASE . '/includes/framework.php');
-      $env = json_decode(file_get_contents("../../../env.json"));
 
       $mainframe = JFactory::getApplication('site');
 
-      
       \Sentry\init(['dsn' => 'https://087b634fd12e49fd80fdb70d4d272f3e@o4504883122143232.ingest.sentry.io/4504884671676416',
-   'environment' => $env->Environment ]);
+      'environment' => $_ENV['ENVIRONMENT'] ]);
 
       $mainframe->initialise();
    }
