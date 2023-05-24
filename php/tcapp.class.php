@@ -35,18 +35,6 @@ class TcApp
       $this->wordpressPath = $_ENV['WORDPRESS_PATH'];
       require_once $this->wordpressPath . '/wp-load.php';
 
-      // define('_JEXEC', 1);
-
-      // define('JPATH_BASE', $_ENV['JPATH_BASE']);
-
-      // require_once(JPATH_BASE . '/includes/defines.php');
-      // require_once(JPATH_BASE . '/includes/framework.php');
-
-      // $mainframe = JFactory::getApplication('site');
-
-
-
-      // $mainframe->initialise();
    }
 
    public function GetUser()
