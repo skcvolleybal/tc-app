@@ -7,12 +7,14 @@
       }
 
       public function Login($postObject){
-         // $credentials = [
-         //    'username' => $postObject['username'],
-         //    'password' => $postObject['password']
-         // ];
+         $credentials = [
+            'user_login' => $postObject['username'],
+            'user_password' => $postObject['password'],
+            'rememberme' => true
+         ];
 
-         $result = wp_authenticate($postObject['username'], $postObject['password']);
+         $result = wp_signon($credentials, true); // true - use HTTP only cookie
+
 
          if ($result instanceof WP_Error) {
             throw new Exception("Kan niet inloggen in WordPress");
