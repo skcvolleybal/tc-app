@@ -21,7 +21,7 @@
       
       $tcApp = new TcApp($database);
       
-      $tcApp->InitJoomla();
+      $tcApp->InitWordpress();
 
       $postObject = $tcApp->getPostedJsonValues();
    
