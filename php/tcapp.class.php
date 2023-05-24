@@ -34,7 +34,6 @@ class TcApp
    {
       $this->wordpressPath = $_ENV['WORDPRESS_PATH'];
       require_once $this->wordpressPath . '/wp-load.php';
-
    }
 
    public function GetUser()
@@ -57,8 +56,7 @@ class TcApp
 
       // Check if user has the TC role
       if ($user->caps['tc'] == true) {
-      }
-      else {
+      } else {
          throw new Exception("Je hebt niet de benodigde rechten, " . $user->data->user_nicename);
       }
    }
