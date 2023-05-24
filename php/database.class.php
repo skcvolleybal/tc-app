@@ -40,9 +40,7 @@
             return $this->dbc;
          }
 
-
-         
-         require_once(JPATH_BASE . "/configuration.php");
+         // require_once(JPATH_BASE . "/configuration.php");
          // $config = new JConfig();
          $host = $_ENV['DB_HOST'];
          $db = $_ENV['DB_NAME'];
