@@ -15,17 +15,16 @@ class TcApp
    protected $wordpressPath;
 
 
-   public function __construct() {
+   public function __construct()
+   {
       try {
          $dotenv = Dotenv::createImmutable(dirname(__DIR__));
          $dotenv->load();
       } catch (InvalidPathException $e) {
-         $this->returnError ("Could not find the .env file!");
+         $this->returnError("Could not find the .env file!");
       }
-
-
    }
-   
+
    public function InitJoomla()
    {
       $this->wordpressPath = $_ENV['WORDPRESS_PATH'];
@@ -40,29 +39,31 @@ class TcApp
 
       $mainframe = JFactory::getApplication('site');
 
-      \Sentry\init(['dsn' => 'https://087b634fd12e49fd80fdb70d4d272f3e@o4504883122143232.ingest.sentry.io/4504884671676416',
-      'environment' => $_ENV['ENVIRONMENT'] ]);
+      \Sentry\init([
+         'dsn' => 'https://087b634fd12e49fd80fdb70d4d272f3e@o4504883122143232.ingest.sentry.io/4504884671676416',
+         'environment' => $_ENV['ENVIRONMENT']
+      ]);
 
       $mainframe->initialise();
    }
 
    public function GetUser()
    {
-         $this->wordpressPath = $_ENV['WORDPRESS_PATH'];
-         require_once $this->wordpressPath . '/wp-load.php';
+      $this->wordpressPath = $_ENV['WORDPRESS_PATH'];
+      require_once $this->wordpressPath . '/wp-load.php';
 
       $wploggedin = is_user_logged_in();
       $wpuser = wp_get_current_user();
 
-      $session = JFactory::getSession();
-      $user = JFactory::getUser();
+      // $session = JFactory::getSession();
+      // $user = JFactory::getUser();
       // if ($wploggedin == false) {
       //    throw new AuthenticationException("Je bent niet (meer) ingelogd!");
       // }
-      if ($user->guest) {
+      if (!$wploggedin) {
          throw new AuthenticationException("Je bent niet (meer) ingelogd!");
       }
-      return $user;
+      return $wpuser;
    }
 
    public function CheckForTcRights($user)
@@ -71,8 +72,16 @@ class TcApp
          throw new Exception("Gebruiker is null...");
       }
       // only allow TC members
-      if (!array_key_exists(46, $user->{'groups'})) {
-         throw new Exception("Je hebt niet de benodigde rechten, " . $user->name);
+      // if (!array_key_exists(46, $user->{'groups'})) {
+      //    throw new Exception("Je hebt niet de benodigde rechten, " . $user->name);
+      // }
+
+      // if ($user->caps)
+
+      if ($user->caps['tc'] == true) {
+      }
+      else {
+         throw new Exception("Je hebt niet de benodigde rechten, " . $user->data->user_nicename);
       }
    }
 
