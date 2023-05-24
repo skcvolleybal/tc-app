@@ -11,6 +11,10 @@ use Dotenv\Exception\InvalidPathException;
 
 class TcApp
 {
+
+   protected $wordpressPath;
+
+
    public function __construct() {
       try {
          $dotenv = Dotenv::createImmutable(dirname(__DIR__));
@@ -18,10 +22,14 @@ class TcApp
       } catch (InvalidPathException $e) {
          $this->returnError ("Could not find the .env file!");
       }
+
+
    }
    
    public function InitJoomla()
    {
+      $this->wordpressPath = $_ENV['WORDPRESS_PATH'];
+      require_once $this->wordpressPath . '/wp-load.php';
 
       define('_JEXEC', 1);
 
@@ -40,8 +48,17 @@ class TcApp
 
    public function GetUser()
    {
+         $this->wordpressPath = $_ENV['WORDPRESS_PATH'];
+         require_once $this->wordpressPath . '/wp-load.php';
+
+      $wploggedin = is_user_logged_in();
+      $wpuser = wp_get_current_user();
+
       $session = JFactory::getSession();
       $user = JFactory::getUser();
+      // if ($wploggedin == false) {
+      //    throw new AuthenticationException("Je bent niet (meer) ingelogd!");
+      // }
       if ($user->guest) {
          throw new AuthenticationException("Je bent niet (meer) ingelogd!");
       }

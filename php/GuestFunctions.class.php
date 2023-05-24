@@ -12,6 +12,20 @@
             'password' => $postObject['password']
          ];
 
+         $result = wp_authenticate($postObject['username'], $postObject['password']);
+
+         if ($result instanceof WP_Error) {
+            throw new Exception("Kan niet inloggen in WordPress");
+         }
+         else {
+            $user_email = $result->data->user_email;
+            return ['message' => "Welkom bij WordPress $user_email", 'dataLists' => $dataLists];
+         }
+         
+
+         die();
+
+
          $joomlaApp = JFactory::getApplication('site');
          
          $db = JFactory::getDbo();
