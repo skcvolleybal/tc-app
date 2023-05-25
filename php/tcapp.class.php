@@ -38,7 +38,6 @@ class TcApp
 
    public function GetUser()
    {
-
       $wploggedin = is_user_logged_in();
       $wpuser = wp_get_current_user();
 
@@ -54,7 +53,7 @@ class TcApp
          throw new Exception("Gebruiker is null...");
       }
 
-      // Check if user has the TC role
+      // Check if user has the TC WordPress role
       if ($user->caps['tc'] == true) {
       } else {
          throw new Exception("Je hebt niet de benodigde rechten, " . $user->data->user_nicename);

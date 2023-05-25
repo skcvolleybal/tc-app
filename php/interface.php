@@ -21,6 +21,7 @@
       
       $tcApp = new TcApp($database);
       
+      // InitWordpress loads Wordpress classes, necessary for authentication and authorization
       $tcApp->InitWordpress();
 
       $postObject = $tcApp->getPostedJsonValues();
@@ -32,15 +33,20 @@
 
       $ListActions = new ListActions($database);
 
+      // GuestActions class is contained in the GuestFunctions.php file
+      // This class contains the CheckIfUserIsloggedin function. If the user is not logged in, the login popup is shown. 
       $guestActions = new GuestActions($ListActions);
       if (method_exists($guestActions, $action)){
          $result = $guestActions->{$action}($postObject);
          $tcApp->returnSuccess($result);
       }
 
+      // At this point, the user should be logged in. We check this and also if the user has TC rights. 
+      // If this fails, an AuthenticationException is thrown (as can be seen further below)
       $user = $tcApp->getUser();
       $tcApp->CheckForTcRights($user);
    
+      // From here, we assume the user is logged in and has proper TC rights. 
       $teamFunctions = new TeamFunctions($database);
       if (method_exists($teamFunctions, $action)){
          $result = $teamFunctions->{$action}($postObject);
