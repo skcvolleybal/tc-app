@@ -115,7 +115,7 @@
                      id: team.id,
                      name: team.name,
                      sequence: team.sequence,
-                     isVisible: true,
+                     isVisible: false,
                      players: GetPlayersInTeam(team.players)
                   });
                });
