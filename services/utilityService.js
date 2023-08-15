@@ -45,9 +45,13 @@
           case 'Uitgeschreven':
             className = 'label-uitgeschreven';
             break;
+          case 'Interesse (midden)':
+            className = 'label-interesse-midden';
+            break;
           default:
             className = 'label-default';
             break;
+          
         }
         _playerTypeClasses[typeId] = className;
         playerTypeClass = className;
