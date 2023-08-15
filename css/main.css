@@ -66,6 +66,13 @@
   font-style: italic;
 }
 
+.label-interesse-midden {
+  color: #87dcab;
+  border: 1px solid #808080;
+  background-color: white;
+  font-style: italic;
+}
+
 .label-uitgeschreven {
   color: #eee;
   background-color: #555;
