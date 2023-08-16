@@ -49,7 +49,7 @@
             className = 'label-interesse-midden';
             break;
           default:
-            className = 'label-default';
+            className = 'label-interesse-midden';
             break;
           
         }
