@@ -67,9 +67,9 @@
 }
 
 .label-interesse-midden {
-  color: #87dcab;
-  border: 1px solid #808080;
-  background-color: white;
+  color: white;
+  border: 1px solid #808081;
+  background-color: #87dcab;
   font-style: italic;
 }
 
