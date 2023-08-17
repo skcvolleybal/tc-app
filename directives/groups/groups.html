@@ -2,6 +2,7 @@
   class="flex-row"
   ng-repeat="mapping in playerService.mappings"
   ng-show="mapping.name == (isTeamsActive?'Teams':'Trainingsgroepen')"
+  style="height: 90%;"
 >
   <div
     class="groups-pick-container flex-column"
@@ -102,4 +103,7 @@
       </div>
     </div>
   </div>
+</div>
+<div style="position: relative; font-size: 14pt; font-style: italic; top: 30px; text-align: center;">
+  Made with 💚 by SKC WebCie
 </div>
