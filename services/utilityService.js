@@ -21,6 +21,9 @@
           return playerType.id == typeId;
         });
         switch (playerType.name) {
+          case 'Interesse-midden':
+            className = 'label-interesse-midden';
+            break;
           case 'Spelverdeler':
             className = 'label-danger';
             break;
@@ -45,11 +48,8 @@
           case 'Uitgeschreven':
             className = 'label-uitgeschreven';
             break;
-          case 'Interesse-midden':
-            className = 'label-interesse-midden';
-            break;
           default:
-            className = 'label-interesse-midden';
+            className = 'label-default';
             break;
           
         }
