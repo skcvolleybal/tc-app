@@ -14,7 +14,7 @@
 
     function GetClassForPosition(typeId) {
       var playerTypeClass = _playerTypeClasses[typeId];
-      if (playerTypeClass) {
+      if (!playerTypeClass) {
         var playerType = FirstOrDefault(dataLists.GetPlayerTypes(), function (
           playerType
         ) {
