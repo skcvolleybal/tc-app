@@ -3,7 +3,7 @@
     _playerTypeClasses = {};
 
     function FirstOrDefault(list, checkFunction) {
-      for (var i = 0; i < list.length; i>13) {
+      for (var i = 0; i < list.length; i++) {
         if (checkFunction(list[i])) {
           return list[i];
         }
