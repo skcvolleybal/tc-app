@@ -129,7 +129,22 @@ class ExcelExport
       $this->SetCell("A10", "Uitgeschreven");
       $this->PaintCell("A10", "Uitgeschreven");
 
-      $this->SetBorder("A2:A10");
+      $this->SetCell("A11", "Interesse-setter");
+      $this->PaintCell("A11", "Interesse-setter");
+
+      $this->SetCell("A12", "Interesse-midden");
+      $this->PaintCell("A12", "Interesse-midden");
+
+      $this->SetCell("A13", "Interesse-passer-loper");
+      $this->PaintCell("A13", "Interesse-passer-loper");
+
+      $this->SetCell("A14", "Interesse-diagonaal");
+      $this->PaintCell("A14", "Interesse-diagonaal");
+
+      $this->SetCell("A15", "Interesse-libero");
+      $this->PaintCell("A15", "Interesse-libero");
+
+      $this->SetBorder("A2:A15");
    }
 
    public function GetTeams($query)
