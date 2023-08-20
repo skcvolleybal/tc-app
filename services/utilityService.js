@@ -32,7 +32,7 @@
             className = 'label-warning';
             break;
           case 'Diagonaal':
-            className = 'label-diagonaal';
+            className = 'label-info';
             break;
           case 'Libero':
             className = 'label-primary';
