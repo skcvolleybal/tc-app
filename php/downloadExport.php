@@ -29,8 +29,8 @@ class ExcelExport
       "Interesse-setter" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
       "Interesse-midden" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => '87dcab'], 'italic' => true]],
       "Interesse-passer-loper" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
-      "Interesse-diagonaal" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
-      "Interesse-libero" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]]
+      "Interesse-diagonaal" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '8bd6f1']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
+      "Interesse-libero" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '598ef7']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]]
    ];
 
    public function __construct($database)
@@ -134,6 +134,7 @@ class ExcelExport
 
       $this->SetCell("A12", "Interesse-midden");
       $this->PaintCell("A12", "Interesse-midden");
+      
 
       $this->SetCell("A13", "Interesse-passer-loper");
       $this->PaintCell("A13", "Interesse-passer-loper");
