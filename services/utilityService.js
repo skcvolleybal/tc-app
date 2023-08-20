@@ -50,13 +50,13 @@
             className = 'label-success-interesse-midden';
             break;
           case 'Interesse-spelverdeler':
-            className = 'label-danger-interesse-spelverdeler';
+            className = 'label-danger-1interesse-spelverdeler';
             break;
           case 'Interesse-passer-loper':
             className = 'label-warning-interesse-passer-loper';
             break;
           case 'Interesse-diagonaal':
-            className = 'label-diagonaal-interesse-diagonaal';
+            className = 'label-diagonaal-1interesse-diagonaal';
             break;
           case 'Interesse-libero':
             className = 'label-primary-interesse-libero';
