@@ -73,6 +73,20 @@
   font-style: italic;
 }
 
+.label-interesse-diagonaal {
+  color: white;
+  border: 1px solid #808081;
+  background-color: #8bd6f1;
+  font-style: italic;
+}
+
+.label-interesse-libero {
+  color: white;
+  border: 1px solid #808081;
+  background-color: #598ef7;
+  font-style: italic;
+}
+
 .label-interesse-setter {
   color: white;
   border: 1px solid #808081;
