@@ -32,7 +32,7 @@
             className = 'label-warning';
             break;
           case 'Diagonaal':
-            className = 'label-info';
+            className = 'label-diagonaal';
             break;
           case 'Libero':
             className = 'label-primary';
@@ -49,8 +49,8 @@
           case 'Interesse-midden':
             className = 'label-interesse-midden';
             break;
-          case 'Interesse-setter':
-            className = 'label-interesse-setter';
+          case 'Interesse-spelverdeler':
+            className = 'label-interesse-spelverdeler';
             break;
           case 'Interesse-passer-loper':
             className = 'label-interesse-passer-loper';

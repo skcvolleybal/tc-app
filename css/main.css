@@ -69,35 +69,41 @@
 .label-interesse-midden {
   color: white;
   border: 1px solid #808081;
-  background-color: #87dcab;
+  background-color: #90c785;
   font-style: italic;
 }
 
 .label-interesse-diagonaal {
   color: white;
   border: 1px solid #808081;
-  background-color: #8bd6f1;
+  background-color: #9ae3f7;
   font-style: italic;
 }
 
 .label-interesse-libero {
   color: white;
   border: 1px solid #808081;
-  background-color: #598ef7;
+  background-color: #80a9f7;
   font-style: italic;
 }
 
-.label-interesse-setter {
+.label-interesse-spelverdeler {
   color: white;
   border: 1px solid #808081;
-  background-color: #f45258;
+  background-color: #e27d81;
   font-style: italic;
+}
+
+.label-diagonaal {
+  color: white;
+  border: 1px solid #808081;
+  background-color: #1bc5f8;
 }
 
 .label-interesse-passer-loper {
   color: white;
   border: 1px solid #808081;
-  background-color: #e9f05f;
+  background-color: #f4c178;
   font-style: italic;
 }
 
