@@ -47,6 +47,7 @@
             break;
           case 'Interesse midden':
             className = 'label-interesse-midden';
+            console.log("Interesse midden Utility services");
             break;
           default:
             className = 'label-default';
