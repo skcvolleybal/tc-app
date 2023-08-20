@@ -28,7 +28,7 @@ class ExcelExport
       "Uitgeschreven" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
       "Interesse-spelverdeler" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'e27d81']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
       "Interesse-midden" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '90c785']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
-      "Interesse-passer-loper" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'e9f05f']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
+      "Interesse-passer-loper" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'f4c178']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
       "Interesse-diagonaal" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '9ae3f7']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
       "Interesse-libero" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '80a9f7']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]]
    ];
