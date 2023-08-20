@@ -20,6 +20,7 @@
         ) {
           return playerType.id == typeId;
         });
+        console.log("console player type " + playerType.name);
         switch (playerType.name) {
           case 'Spelverdeler':
             className = 'label-danger';
@@ -45,7 +46,7 @@
           case 'Uitgeschreven':
             className = 'label-uitgeschreven';
             break;
-          case 'Interesse midden':
+          case 'Interesse-midden':
             className = 'label-interesse-midden';
             console.log("Interesse midden Utility services");
             break;
