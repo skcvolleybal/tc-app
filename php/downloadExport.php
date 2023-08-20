@@ -25,7 +25,12 @@ class ExcelExport
       "Trainingslid" =>  ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'f5f5f5']], 'font' => ['color' => ['argb' => '808080']]],
       "Interesse"    =>  ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'FFFFFF']], 'font' => ['color' => ['argb' => '5e5e5e'], 'italic' => true]],
       "Nog Niets" =>     ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '777777']], 'font' => ['color' => ['argb' => 'FFFFFF']]],
-      "Uitgeschreven" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]]
+      "Uitgeschreven" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
+      "Interesse-setter" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
+      "Interesse-midden" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => '87dcab'], 'italic' => true]],
+      "Interesse-passer-loper" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
+      "Interesse-diagonaal" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
+      "Interesse-libero" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]]
    ];
 
    public function __construct($database)
