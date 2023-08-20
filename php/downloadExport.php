@@ -129,8 +129,8 @@ class ExcelExport
       $this->SetCell("A10", "Uitgeschreven");
       $this->PaintCell("A10", "Uitgeschreven");
 
-      $this->SetCell("A11", "Interesse-setter");
-      $this->PaintCell("A11", "Interesse-setter");
+      $this->SetCell("A11", "Interesse-spelverdeler");
+      $this->PaintCell("A11", "Interesse-spelverdeler");
 
       $this->SetCell("A12", "Interesse-midden");
       $this->PaintCell("A12", "Interesse-midden");
