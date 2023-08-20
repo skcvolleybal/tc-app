@@ -48,7 +48,18 @@
             break;
           case 'Interesse-midden':
             className = 'label-interesse-midden';
-            console.log("Interesse midden Utility services");
+            break;
+          case 'Interesse-setter':
+            className = 'label-interesse-setter';
+            break;
+          case 'Interesse-passer-loper':
+            className = 'label-interesse-passer-loper';
+            break;
+          case 'Interesse-diagonaal':
+            className = 'label-interesse-diagonaal';
+            break;
+          case 'Interesse-libero':
+            className = 'label-interesse-libero';
             break;
           default:
             className = 'label-default';

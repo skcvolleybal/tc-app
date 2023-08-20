@@ -26,9 +26,9 @@ class ExcelExport
       "Interesse"    =>  ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'FFFFFF']], 'font' => ['color' => ['argb' => '5e5e5e'], 'italic' => true]],
       "Nog Niets" =>     ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '777777']], 'font' => ['color' => ['argb' => 'FFFFFF']]],
       "Uitgeschreven" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
-      "Interesse-setter" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
-      "Interesse-midden" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => '87dcab'], 'italic' => true]],
-      "Interesse-passer-loper" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
+      "Interesse-setter" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'f45258']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
+      "Interesse-midden" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '87dcab']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
+      "Interesse-passer-loper" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => 'e9f05f']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
       "Interesse-diagonaal" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]],
       "Interesse-libero" => ['fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'color' => ['argb' => '555555']], 'font' => ['color' => ['argb' => 'eeeeee'], 'italic' => true]]
    ];

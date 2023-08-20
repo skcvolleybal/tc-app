@@ -73,6 +73,22 @@
   font-style: italic;
 }
 
+.label-interesse-setter {
+  color: white;
+  border: 1px solid #808081;
+  background-color: #f45258;
+  font-style: italic;
+}
+
+.label-interesse-passer-loper {
+  color: white;
+  border: 1px solid #808081;
+  background-color: #e9f05f;
+  font-style: italic;
+}
+
+
+
 .label-uitgeschreven {
   color: #eee;
   background-color: #555;
