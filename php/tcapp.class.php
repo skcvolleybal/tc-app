@@ -11,41 +11,40 @@ use Dotenv\Exception\InvalidPathException;
 
 class TcApp
 {
-   public function __construct() {
+
+   protected $wordpressPath;
+
+
+   public function __construct()
+   {
       try {
          $dotenv = Dotenv::createImmutable(dirname(__DIR__));
          $dotenv->load();
       } catch (InvalidPathException $e) {
-         $this->returnError ("Could not find the .env file!");
+         $this->returnError("Could not find the .env file!");
       }
+
+      \Sentry\init([
+         'dsn' => 'https://087b634fd12e49fd80fdb70d4d272f3e@o4504883122143232.ingest.sentry.io/4504884671676416',
+         'environment' => $_ENV['ENVIRONMENT']
+      ]);
    }
-   
-   public function InitJoomla()
+
+   public function InitWordpress()
    {
-
-      define('_JEXEC', 1);
-
-      define('JPATH_BASE', $_ENV['JPATH_BASE']);
-
-      require_once(JPATH_BASE . '/includes/defines.php');
-      require_once(JPATH_BASE . '/includes/framework.php');
-
-      $mainframe = JFactory::getApplication('site');
-
-      \Sentry\init(['dsn' => 'https://087b634fd12e49fd80fdb70d4d272f3e@o4504883122143232.ingest.sentry.io/4504884671676416',
-      'environment' => $_ENV['ENVIRONMENT'] ]);
-
-      $mainframe->initialise();
+      $this->wordpressPath = $_ENV['WORDPRESS_PATH'];
+      require_once $this->wordpressPath . '/wp-load.php';
    }
 
    public function GetUser()
    {
-      $session = JFactory::getSession();
-      $user = JFactory::getUser();
-      if ($user->guest) {
+      $wploggedin = is_user_logged_in();
+      $wpuser = wp_get_current_user();
+
+      if (!$wploggedin) {
          throw new AuthenticationException("Je bent niet (meer) ingelogd!");
       }
-      return $user;
+      return $wpuser;
    }
 
    public function CheckForTcRights($user)
@@ -53,9 +52,11 @@ class TcApp
       if (empty($user)) {
          throw new Exception("Gebruiker is null...");
       }
-      // only allow TC members
-      if (!array_key_exists(46, $user->{'groups'})) {
-         throw new Exception("Je hebt niet de benodigde rechten, " . $user->name);
+
+      // Check if user has the TC WordPress role
+      if ($user->caps['tc'] == true) {
+      } else {
+         throw new Exception("Je hebt niet de benodigde rechten, " . $user->data->user_nicename);
       }
    }
 

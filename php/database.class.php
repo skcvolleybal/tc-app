@@ -1,6 +1,12 @@
 <?php
    require_once("param.class.php");
 
+   require '../vendor/autoload.php';
+
+   use Dotenv\Dotenv;
+   use Dotenv\Exception\InvalidPathException;
+
+
    class Database {
       private $dbc = null;
 
@@ -33,13 +39,13 @@
          if ($this->dbc != null){
             return $this->dbc;
          }
-         
-         require_once(JPATH_BASE . "/configuration.php");
-         $config = new JConfig();
-         $host = $config->host;
-         $db = $config->db;
-         $user = $config->user;
-         $password = $config->password;
+
+         // require_once(JPATH_BASE . "/configuration.php");
+         // $config = new JConfig();
+         $host = $_ENV['DB_HOST'];
+         $db = $_ENV['DB_NAME'];
+         $user = $_ENV['DB_USER'];
+         $password = $_ENV['DB_PWD'];
          $this->dbc = new PDO("mysql:host=$host;dbname=$db", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
          return $this->dbc;
       }
