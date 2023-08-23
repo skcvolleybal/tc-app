@@ -103,7 +103,7 @@
          }
       }
 
-      function LoadAllPlayers() {
+      function LoadAllPlayers() { 
          var deferred = $q.defer();
          mappings[0].data = [];
          mappings[1].data = [];
