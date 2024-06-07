@@ -70,6 +70,8 @@
          $result = $changeFunctions->{$action}($postObject);
          $tcApp->returnSuccess($result);
       }
+
+
    }
    catch(AuthenticationException $e){
       $tcApp->returnAuthenticationError();

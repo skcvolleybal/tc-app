@@ -55,6 +55,7 @@
       }
 
       $scope.Refresh = function () {
+         console.log('clicked refresh');
          changeService.GetChanges()
             .then(function (changes) {
                angular.forEach(changes, function (change) {

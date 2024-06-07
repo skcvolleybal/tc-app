@@ -68,14 +68,23 @@
                .then(function (data) {
                   _changes = [];
                   deferrable.resolve(data);
+      
+                  // Add your console.log callback here
+                  console.log('Changes saved successfully:', data);
+               })
+               .catch(function (error) {
+                  // Handle any errors
+                  console.error('Error saving changes:', error);
+                  deferrable.reject(error);
                });
          }
          else {
             Notification.success("Geen wijzigingen");
          }
-
+      
          return deferrable.promise;
       }
+      
 
       function GetChanges() {
          var defer = $q.defer();
@@ -102,7 +111,7 @@
                         newChanges.push(changeList[i]);
                      }
                      else {
-                        Notification.warning(changeList[i].name + " is op de server en in de browser gewijzigd en is niet geüpdatet");
+                        Notification.warning(changeList[i].name + " is op de server en in de browser gewijzigd en is niet geï¿½pdatet");
                      }
                   }
                   defer.resolve(newChanges);

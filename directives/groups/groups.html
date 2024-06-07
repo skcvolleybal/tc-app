@@ -15,9 +15,9 @@
           <a
             class="list-group-item"
             style="padding: 5px 10px; cursor: pointer;"
-            ng-class="[{'list-group-item-info': team.isVisible}]"
+            ng-class="[{'list-group-item-info': team.isVisible}]" 
             ng-repeat="team in mapping.data"
-            ng-click="team.isVisible = !team.isVisible"
+            ng-click="toggleVisibility(team)"
           >
             {{ team.name }}
           </a>

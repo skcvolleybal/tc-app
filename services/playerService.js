@@ -10,6 +10,16 @@
          data: []
       }];
 
+      function getCookieValue(name) {
+         const regex = new RegExp(`(^| )${name}=([^;]+)`)
+         const match = document.cookie.match(regex)
+         if (match) {
+            return match[2]
+         }
+      }
+
+      var visibleTeams = getCookieValue("visibleTeams");
+
       var idCounter = -1;
 
       function GetPlayersInTeam(players) {
@@ -99,11 +109,15 @@
 
       function ApplyChangesInUI() {
          if ($rootScope.$$phase != '$apply' && $rootScope.$$phase != '$digest') {
-            $rootScope.$apply();
+            console.log("UI Updated");
+            // Auto trigger save here?
+            $rootScope.$applyAsync(function () {
+               changeService.SaveChanges();
+            });
          }
       }
 
-      function LoadAllPlayers() { 
+      function LoadAllPlayers() {
          var deferred = $q.defer();
          mappings[0].data = [];
          mappings[1].data = [];
@@ -111,11 +125,12 @@
          IOService.executeAction('GetAllPlayers')
             .then(function (lists) {
                angular.forEach(lists.teamMapping, function (team) {
+                  console.log(visibleTeams.includes(team.name));
                   mappings[0].data.push({
                      id: team.id,
                      name: team.name,
                      sequence: team.sequence,
-                     isVisible: false,
+                     isVisible: visibleTeams.includes(team.name), // Check if the team is in the visibleTeams array
                      players: GetPlayersInTeam(team.players)
                   });
                });
@@ -125,7 +140,7 @@
                      id: team.id,
                      name: team.name,
                      sequence: team.sequence,
-                     isVisible: false,
+                     isVisible: visibleTeams.includes(team.name),
                      players: GetPlayersInTeam(team.players)
                   });
                });
