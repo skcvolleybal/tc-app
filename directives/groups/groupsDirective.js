@@ -59,7 +59,7 @@
           if (!visibleTeams) {
             visibleTeams = [];
           } else {
-            visibleTeams = visibleTeams.split(','); // Assuming the names are stored as a comma-separated string
+            visibleTeams = visibleTeams.split(',');  
           }
 
           var index = visibleTeams.indexOf(team.name);
@@ -76,7 +76,7 @@
           }
 
           // Save the updated array back to the cookie
-          setCookieValue("visibleTeams", visibleTeams.join(','), 365); // Assuming you have a setCookieValue function
+          setCookieValue("visibleTeams", visibleTeams.join(','), 365); 
         };
 
         function setCookieValue(name, value, days) {
