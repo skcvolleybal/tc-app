@@ -99,11 +99,15 @@
 
       function ApplyChangesInUI() {
          if ($rootScope.$$phase != '$apply' && $rootScope.$$phase != '$digest') {
-            $rootScope.$apply();
+            console.log("UI Updated");
+            // Auto trigger save here?
+            $rootScope.$applyAsync(function() {
+               changeService.SaveChanges();
+            });
          }
       }
 
-      function LoadAllPlayers() { 
+      function LoadAllPlayers() {
          var deferred = $q.defer();
          mappings[0].data = [];
          mappings[1].data = [];
