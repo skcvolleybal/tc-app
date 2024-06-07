@@ -89,6 +89,13 @@
           document.cookie = name + "=" + (value || "") + expires + "; path=/";
         }
 
+        // Initialize the visibleTeams cookie if it doesn't exist
+        var visibleTeams = getCookieValue("visibleTeams");
+        if (!visibleTeams) {
+          setCookieValue("visibleTeams", ",", 365);
+        }
+
+
       },
     };
   });
