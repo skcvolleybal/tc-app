@@ -11,7 +11,6 @@
    require_once("GuestFunctions.class.php");
    require_once("TeamFunctions.class.php");
    require_once("PlayerFunctions.class.php");
-   require_once("fetchUpdate.php");
    require_once("ListActions.class.php");
    require_once("ChangeFunctions.class.php");
    
@@ -72,7 +71,6 @@
          $tcApp->returnSuccess($result);
       }
 
-      $fetchUpdate = new FetchUpdate($database, $ListActions);
 
    }
    catch(AuthenticationException $e){
