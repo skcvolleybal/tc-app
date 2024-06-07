@@ -111,8 +111,10 @@
          if ($rootScope.$$phase != '$apply' && $rootScope.$$phase != '$digest') {
             console.log("UI Updated");
             // Auto trigger save here?
+            
             $rootScope.$applyAsync(function () {
-               changeService.SaveChanges();
+               // Autosave when drag/dropping disabled. Ask TC if they want it. 
+               // changeService.SaveChanges();
             });
          }
       }
