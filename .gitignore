@@ -2,3 +2,4 @@ node_modules
 .vscode/launch.json
 vendor
 .env
+.DS_Store

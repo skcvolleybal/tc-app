@@ -301,7 +301,7 @@ class ExcelExport
 $database = new Database();
 
 $tcApp = new TcApp();
-$tcApp->InitJoomla();
+$tcApp->InitWordpress();
 $user = $tcApp->GetUser();
 $tcApp->CheckForTcRights($user);
 
