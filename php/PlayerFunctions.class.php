@@ -176,15 +176,15 @@
          }
 
          // For now keep interesseId as geen, TODO
-         $interesseId = 6; 
+         $interesseId = 6;
 
-         $query = "insert into tcapp_players (name, team_id, training_id, type_id, interesse_id) values (:name, :teamId, :trainingId, :typeId, interesseId)";
+         $query = "insert into tcapp_players (name, team_id, training_id, type_id, interesse_id) values (:name, :teamId, :trainingId, :typeId, :interesseId)";
          $params = [
             new Param(":name", $name, PDO::PARAM_STR),
             new Param(":teamId", $teamId, PDO::PARAM_INT),
             new Param(":trainingId", $trainingId, PDO::PARAM_INT),
             new Param(":typeId", $typeId, PDO::PARAM_INT),
-            new Param(":interesseId", $typeId, PDO::PARAM_INT)
+            new Param(":interesseId", $interesseId, PDO::PARAM_INT)
          ];
          $playerId = $this->database->executeQuery($query, $params);
 
