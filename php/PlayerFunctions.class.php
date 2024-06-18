@@ -52,7 +52,7 @@
                       P.name,
                       P.information,
                       P.type_id as typeId,
-                      p.interesse_id as interesseId
+                      P.interesse_id as interesseId
                    from tcapp_teams T
                    left join tcapp_players P on P.team_id = T.id
                    where T.type = 'team'
