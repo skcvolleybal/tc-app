@@ -17,8 +17,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `tcapp_players` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
-  `interesse_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
+  `interesse_id` int(11) NOT NULL,
   `team_id` int(11) NOT NULL,
   `training_id` int(11) NOT NULL,
   `facebook_url` varchar(128) DEFAULT NULL,
@@ -40,7 +40,7 @@ INSERT INTO `tcapp_player_types` (`id`, `name`) VALUES
 (6, 'Nog Niets'),
 (7, 'Trainingslid'),
 (8, 'Interesse'),
-(9, 'Uitgeschreven'),
+(9, 'Uitgeschreven');
 
 CREATE TABLE `tcapp_teams` (
   `id` int(11) NOT NULL,
@@ -99,6 +99,7 @@ ALTER TABLE `tcapp_players`
   ADD KEY `team_id` (`team_id`),
   ADD KEY `training_id` (`training_id`),
   ADD KEY `type_id` (`type_id`);
+  ADD KEY `interesse_id` (`interesse_id`);
 
 
 ALTER TABLE `tcapp_player_types`
@@ -120,6 +121,21 @@ ALTER TABLE `tcapp_players`
   ADD CONSTRAINT `FK_TEAM_ID` FOREIGN KEY (`team_id`) REFERENCES `tcapp_teams` (`id`),
   ADD CONSTRAINT `FK_TRAINING_ID` FOREIGN KEY (`training_id`) REFERENCES `tcapp_teams` (`id`),
   ADD CONSTRAINT `FK_TYPE_ID` FOREIGN KEY (`type_id`) REFERENCES `tcapp_player_types` (`id`);
+  ADD CONSTRAINT `FK_TYPE_ID` FOREIGN KEY (`interesse_id`) REFERENCES `tcapp_interesse_types` (`id`);
+
+
+CREATE TABLE `tcapp_interesse_types` (
+  `id` int NOT NULL,
+  `interesse_name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `tcapp_interesse_types`
+  ADD PRIMARY KEY (`id`);
+
+
+
+
 COMMIT;
+
 
 ```
