@@ -7,7 +7,6 @@
         $scope.playerTypes = dataLists.GetPlayerTypes();
         $scope.GetClassForPosition = utilityService.GetClassForPosition;
 
-        console.log($scope);
       },
     };
   });

@@ -60,7 +60,6 @@
     }
 
     function GetInteresseForPosition(interestId) {
-      console.log("interestId" + interestId)
       switch (interestId) {
         case 1: //'Interesse-spelverdeler':
           border = '2px solid #d9534f'
@@ -95,7 +94,6 @@
       styles.background = GetClassForPosition(typeId);
       styles.border = GetInteresseForPosition(interesseId);
 
-      console.log(styles)
       return styles
 
     }

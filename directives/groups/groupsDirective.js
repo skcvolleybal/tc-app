@@ -4,7 +4,6 @@
       templateUrl: 'directives/groups/groups.html',
       controller: function (
         $scope,
-        $element,
         playerService,
         changeService,
         dataLists,
@@ -30,7 +29,6 @@
         };
 
         $scope.ChangeInteresse = function (player, newType) {
-          console.log("ChangeInteresse " + newType.id)
           player.interesseId = newType.id;
           player.changeType = changeService.changeTypes.updatePlayer;
           playerService.ChangePlayer(player);
@@ -99,17 +97,6 @@
           }
           document.cookie = name + "=" + (value || "") + expires + "; path=/";
         }
-
-        // Event handler for toggling submenu visibility
-          // $element.find('.dropdown-submenu > a.test').on("click", function (e) {
-          //   console.log("hier");
-          //   var $parentLi = $(this).parent('.dropdown-submenu');
-          //   console.log($parentLi);
-          //   $parentLi.toggleClass('open');
-          //   $parentLi.find('ul.dropdown-menu').toggle();
-          //   e.stopPropagation();
-          //   e.preventDefault();
-          // });
 
         // Initialize the visibleTeams cookie if it doesn't exist
         var visibleTeams = getCookieValue("visibleTeams");
