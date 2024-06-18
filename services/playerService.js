@@ -29,6 +29,7 @@
                id: player.id,
                name: player.name,
                typeId: player.typeId,
+               interesseId: player.interesseId,
                teamId: player.teamId,
                trainingId: player.trainingId,
                information: player.information
@@ -80,6 +81,7 @@
             id: newPlayer.id,
             name: newPlayer.name,
             typeId: newPlayer.typeId,
+            interesseId: newPlayer.interesseId,
             teamId: newPlayer.teamId,
             trainingId: newPlayer.trainingId,
             information: newPlayer.information
@@ -172,6 +174,7 @@
          var newTeam = {};
          angular.forEach(mappings, function (mapping) {
             if (mapping.type === team.type) {
+               console.log(mapping)
                var newSequence = GetNewSequence(mapping);
                var newId = idCounter--;
                newTeam = {

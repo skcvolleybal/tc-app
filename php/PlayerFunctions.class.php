@@ -31,6 +31,7 @@
                   'id' => $player['id'],
                   'name' => $player['name'],
                   'typeId' => $player['typeId'],
+                  'interesseId' => $player['interesseId'],
                   'teamId' => $player['teamId'],
                   'trainingId' => $player['trainingId'],
                   'information' => $player['information']
@@ -50,7 +51,8 @@
 	                   P.id,
                       P.name,
                       P.information,
-                      P.type_id as typeId
+                      P.type_id as typeId,
+                      p.interesse_id as interesseId
                    from tcapp_teams T
                    left join tcapp_players P on P.team_id = T.id
                    where T.type = 'team'
@@ -65,7 +67,8 @@
                      P.id,
                      P.name,
                      P.information,
-                     P.type_id as typeId
+                     P.type_id as typeId,
+                     p.interesse_id as interesseId
                    from tcapp_teams T
                    left join tcapp_players P on P.training_id = T.id
                    where T.type = 'training'
@@ -90,6 +93,7 @@
                      player.id, 
                      player.name, 
                      type.name as type,
+                     interesse.interesse_name as interesse
                      training.name as training,
                      team.name as team,
                      information
@@ -97,6 +101,7 @@
                    left join tcapp_teams team on player.team_id = team.id
                    left join tcapp_teams training on player.training_id = training.id
                    left join tcapp_player_types type on player.type_id = type.id
+                   left join tcapp_interesse_types interesse on player.interesse_id = interesse.id
                    where player.id = :playerId";
          $params = [new Param(":playerId", $playerId, PDO::PARAM_INT)];
          $result = $this->database->executeQuery($query, $params);
@@ -107,6 +112,7 @@
                "id" => $player['id'],
                "name" => $player['name'],
                "type" => $player['type'],
+               "interesse" => $player['interesse'],
                "team" => $player['training'],
                "training" => $player['team'],
                "information" => $player['information']
@@ -169,24 +175,29 @@
             throw new Exception("Geen spelers type gevonden");
          }
 
-         $query = "insert into tcapp_players (name, team_id, training_id, type_id) values (:name, :teamId, :trainingId, :typeId)";
+         // For now keep interesseId as geen, TODO
+         $interesseId = 6; 
+
+         $query = "insert into tcapp_players (name, team_id, training_id, type_id, interesse_id) values (:name, :teamId, :trainingId, :typeId, interesseId)";
          $params = [
             new Param(":name", $name, PDO::PARAM_STR),
             new Param(":teamId", $teamId, PDO::PARAM_INT),
             new Param(":trainingId", $trainingId, PDO::PARAM_INT),
-            new Param(":typeId", $typeId, PDO::PARAM_INT)
+            new Param(":typeId", $typeId, PDO::PARAM_INT),
+            new Param(":interesseId", $typeId, PDO::PARAM_INT)
          ];
          $playerId = $this->database->executeQuery($query, $params);
 
          return $playerId;
       }
 
-      public function UpdatePlayer($id, $teamId, $trainingId, $typeId){
-         $query = "update tcapp_players set team_id = :teamId, training_id = :trainingId, type_id = :typeId where id = :id";
+      public function UpdatePlayer($id, $teamId, $trainingId, $typeId, $interesseId){
+         $query = "update tcapp_players set team_id = :teamId, training_id = :trainingId, type_id = :typeId, interesse_id = :interesseId where id = :id";
          $params = [
             new Param(":teamId", $teamId, PDO::PARAM_INT),
             new Param(":trainingId", $trainingId, PDO::PARAM_INT),
             new Param(":typeId", $typeId, PDO::PARAM_INT),
+            new Param(":interesseId", $interesseId, PDO::PARAM_INT),
             new Param(":id", $id, PDO::PARAM_INT)
          ];
          $this->database->executeQuery($query, $params);

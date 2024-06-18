@@ -53,7 +53,7 @@
         training-id="{{ player.trainingId }}"
         type-id="{{ player.typeId }}"
         name="{{ player.name }}"
-        ng-class="GetClassForPosition(player.typeId)"
+        ng-style="GetStyleForPosition(player.typeId, player.interesseId)"
         information="{{ player.information }}"
         style="font-size: 15px; margin: 4px; cursor: move;"
       >
@@ -83,17 +83,29 @@
             >
               <i class="fa fa-chevron-right"></i>
             </button>
-            <ul class="dropdown-menu" style="font-style: initial;">
+            <ul class="dropdown-menu">
               <li ng-repeat="playerType in dataLists.GetPlayerTypes()">
-                <a href="#" ng-click="ChangePosition(player, playerType)"
-                  >{{ playerType.name }}</a
-                >
+                <a href="#" ng-click="ChangePosition(player, playerType)">
+                  {{ playerType.name }}
+                </a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Interesse <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="interesseType in dataLists.GetPlayerInteresse()">
+                    <a href="#" ng-click="ChangeInteresse(player, interesseType)">
+                      {{ interesseType.interesse_name }}
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li role="separator" class="divider"></li>
               <li>
                 <a href="#" ng-click="EditPlayer(player.id)">Wijzigen</a>
               </li>
               <li role="separator" class="divider"></li>
+              
               <li>
                 <a href="#" ng-click="DeletePlayer(player)">Verwijderen</a>
               </li>

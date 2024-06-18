@@ -39,7 +39,12 @@ INSERT INTO `tcapp_player_types` (`id`, `name`) VALUES
 (6, 'Nog Niets'),
 (7, 'Trainingslid'),
 (8, 'Interesse'),
-(9, 'Uitgeschreven');
+(9, 'Uitgeschreven'),
+(10, 'Interesse-midden'),
+(11, 'Interesse-spelverdeler'),
+(12, 'Interesse-buiten'),
+(13, 'Interesse-diagonaal'),
+(14, 'Interesse-libero');
 
 CREATE TABLE `tcapp_teams` (
   `id` int(11) NOT NULL,

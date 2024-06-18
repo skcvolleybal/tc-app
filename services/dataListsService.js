@@ -22,6 +22,10 @@
          return dataLists.playerTypes;
       }
 
+      function GetPlayerInteresse() {
+         return dataLists.interesseTypes
+      }
+
       function AddTeam(team) {
          var newTeam = {
             id: team.id,
@@ -103,6 +107,7 @@
          GetTrainingGroups: GetTrainingGroups,
          GetTeams: GetTeams,
          GetPlayerTypes: GetPlayerTypes,
+         GetPlayerInteresse: GetPlayerInteresse,
          GetLists: GetLists,
          SetLists: SetLists,
          AddTeam: AddTeam,

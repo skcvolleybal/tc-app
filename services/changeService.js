@@ -39,7 +39,8 @@
                name: change.name,
                teamId: change.teamId,
                trainingId: change.trainingId,
-               typeId: change.typeId
+               typeId: change.typeId,
+               interesseId: change.interesseId
             };
          }
          else {

@@ -14,6 +14,9 @@
          $query = "select * from tcapp_player_types order by id";
          $playerTypes = $this->database->executeQuery($query);
 
-         return ['trainingGroups' => $trainingsgroepen, 'teams' => $teams, 'playerTypes' => $playerTypes];
+         $query = "select * from tcapp_interesse_types order by id";
+         $interesseTypes = $this->database->executeQuery($query);
+
+         return ['trainingGroups' => $trainingsgroepen, 'teams' => $teams, 'playerTypes' => $playerTypes, 'interesseTypes' => $interesseTypes];
       }
    }

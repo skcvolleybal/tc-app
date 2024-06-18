@@ -15,66 +15,96 @@
     function GetClassForPosition(typeId) {
       var playerTypeClass = _playerTypeClasses[typeId];
       if (!playerTypeClass) {
-        var playerType = FirstOrDefault(dataLists.GetPlayerTypes(), function (
-          playerType
-        ) {
+        var playerType = FirstOrDefault(dataLists.GetPlayerTypes(), function (playerType) {
           return playerType.id == typeId;
         });
-        console.log("console player type " + playerType.name);
         switch (playerType.name) {
           case 'Spelverdeler':
-            className = 'label-danger';
+            background = '#d9534f'
             break;
           case 'Midden':
-            className = 'label-success';
+            // styles = setMiddenStyle(typeId, playerId)
+            background = '#5cb85c';
             break;
           case 'Passer-loper':
-            className = 'label-warning';
+            // styles = setPasserStyle(typeId, playerId)
+            background = '#f0ad4e';
             break;
           case 'Diagonaal':
-            className = 'label-diagonaal';
+            background = '#1bc5f8';
             break;
           case 'Libero':
-            className = 'label-primary';
+            background ='#337ab7';
             break;
           case 'Trainingslid':
-            className = 'label-costum';
+            styles.background ='#f8e71c';
             break;
           case 'Interesse':
-            className = 'label-interesse';
+            // styles.color = '#5e5e5e';
+            // styles.border = '1px solid #808080';
+            styles.background ='#ff6f61';
+            // styles['font-style'] = 'italic';
             break;
           case 'Uitgeschreven':
-            className = 'label-uitgeschreven';
-            break;
-          case 'Interesse-midden':
-            className = 'label-success-interesse-midden';
-            break;
-          case 'Interesse-spelverdeler':
-            className = 'label-danger-1interesse-spelverdeler';
-            break;
-          case 'Interesse-passer-loper':
-            className = 'label-warning-interesse-passer-loper';
-            break;
-          case 'Interesse-diagonaal':
-            className = 'label-diagonaal-1interesse-diagonaal';
-            break;
-          case 'Interesse-libero':
-            className = 'label-primary-interesse-libero';
+            background ='#555';
+            // styles['text-decoration'] = 'line-through';
             break;
           default:
-            className = 'label-default';
+            background = '#ff6f61';
             break;
-          
         }
-        _playerTypeClasses[typeId] = className;
-        playerTypeClass = className;
+        // _playerTypeClasses[typeId] = styles;
+        // playerTypeClass = styles;
       }
-      return playerTypeClass;
+      return background;
+    }
+
+    function GetInteresseForPosition(interestId) {
+      console.log("interestId" + interestId)
+      switch (interestId) {
+        case 1: //'Interesse-spelverdeler':
+          border = '2px solid #d9534f'
+          break;
+        case 2: // 'Interesse-midden':
+          // styles = setMiddenInteresse()
+          border = '2px solid #5cb85c';
+          break;
+        case 3: //'Interesse-passer-loper':
+          border = '2px solid #f0ad4e';
+          break;
+        case 4: //'Interesse-diagonaal':
+          border = '2px solid #1bc5f8';
+          break;
+        case 5: //'Interesse-libero':
+          border =  '2px solid #337ab7';
+          break;
+        case 6: //'Geen':
+          border = '2px solid white';
+          break;
+        default:
+          border = '2px solid white';
+          break;
+      }
+      return border
+    }
+
+    function GetStyleForPosition(typeId, interesseId) {
+      styles = {'background' : '#eee',
+                'border': '2px solid blue'
+      }
+      styles.background = GetClassForPosition(typeId);
+      styles.border = GetInteresseForPosition(interesseId);
+
+      console.log(styles)
+      return styles
+
     }
 
     return {
       FirstOrDefault: FirstOrDefault,
       GetClassForPosition: GetClassForPosition,
+      GetStyleForPosition: GetStyleForPosition,
+      GetInteresseForPosition: GetInteresseForPosition
     };
   });
 })(angular.module('tcApp'));

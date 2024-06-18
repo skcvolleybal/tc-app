@@ -55,7 +55,7 @@
                   $playerId = $this->GetRightId($change->id, $ids['playerIds']);
                   $teamId = $this->GetRightId($change->teamId, $ids['teamIds']);
                   $trainingId = $this->GetRightId($change->trainingId, $ids['teamIds']);
-                  $this->playerFunctions->UpdatePlayer($playerId, $teamId, $trainingId, $change->typeId);
+                  $this->playerFunctions->UpdatePlayer($playerId, $teamId, $trainingId, $change->typeId, $change->interesseId);
                   break;
                case "deletePlayer":
                   $playerId = $this->GetRightId($change->id, $ids['teamIds']);
