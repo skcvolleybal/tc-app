@@ -17,6 +17,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `tcapp_players` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
+  `interesse_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
   `team_id` int(11) NOT NULL,
   `training_id` int(11) NOT NULL,
