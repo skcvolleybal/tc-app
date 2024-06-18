@@ -98,7 +98,7 @@ ALTER TABLE `tcapp_players`
   ADD PRIMARY KEY (`id`),
   ADD KEY `team_id` (`team_id`),
   ADD KEY `training_id` (`training_id`),
-  ADD KEY `type_id` (`type_id`);
+  ADD KEY `type_id` (`type_id`),
   ADD KEY `interesse_id` (`interesse_id`);
 
 
@@ -117,13 +117,6 @@ ALTER TABLE `tcapp_player_types`
 ALTER TABLE `tcapp_teams`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1061;
 
-ALTER TABLE `tcapp_players`
-  ADD CONSTRAINT `FK_TEAM_ID` FOREIGN KEY (`team_id`) REFERENCES `tcapp_teams` (`id`),
-  ADD CONSTRAINT `FK_TRAINING_ID` FOREIGN KEY (`training_id`) REFERENCES `tcapp_teams` (`id`),
-  ADD CONSTRAINT `FK_TYPE_ID` FOREIGN KEY (`type_id`) REFERENCES `tcapp_player_types` (`id`);
-  ADD CONSTRAINT `FK_TYPE_ID` FOREIGN KEY (`interesse_id`) REFERENCES `tcapp_interesse_types` (`id`);
-
-
 CREATE TABLE `tcapp_interesse_types` (
   `id` int NOT NULL,
   `interesse_name` varchar(30) NOT NULL
@@ -132,10 +125,21 @@ CREATE TABLE `tcapp_interesse_types` (
 ALTER TABLE `tcapp_interesse_types`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `tcapp_players`
+  ADD CONSTRAINT `FK_TEAM_ID` FOREIGN KEY (`team_id`) REFERENCES `tcapp_teams` (`id`),
+  ADD CONSTRAINT `FK_TRAINING_ID` FOREIGN KEY (`training_id`) REFERENCES `tcapp_teams` (`id`),
+  ADD CONSTRAINT `FK_TYPE_ID` FOREIGN KEY (`type_id`) REFERENCES `tcapp_player_types` (`id`);
 
-
+INSERT INTO `tcapp_interesse_types` (`id`, `interesse_name`) VALUES
+(1, 'Spelverdeler'),
+(2, 'Midden'),
+(3, 'Passer-loper'),
+(4, 'Diagonaal'),
+(5, 'Libero'),
+(6, 'Geen');
 
 COMMIT;
+
 
 
 ```
