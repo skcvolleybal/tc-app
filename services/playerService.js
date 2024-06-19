@@ -77,6 +77,7 @@
             }
          }
 
+
          var newListItem = {
             id: newPlayer.id,
             name: newPlayer.name,
@@ -105,6 +106,7 @@
       function ChangePlayer(newPlayer) {
          DeletePlayer(newPlayer.id);
          AddPlayerToMappings(newPlayer);
+         // utilityService.GetStyleForPosition(newPlayer.typeId, newPlayer.interesseId)
 
          ApplyChangesInUI();
       }

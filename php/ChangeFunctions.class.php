@@ -48,7 +48,7 @@
                case "addPlayer":
                   $teamId = $this->GetRightId($change->teamId, $ids['teamIds']);
                   $trainingId = $this->GetRightId($change->trainingId, $ids['teamIds']);
-                  $playerId = $this->playerFunctions->AddPlayer($change->name, $teamId, $trainingId, $change->typeId);
+                  $playerId = $this->playerFunctions->AddPlayer($change->name, $teamId, $trainingId, $change->typeId, $change->interesseId);
                   $ids['playerIds'][$change->id] = $playerId;
                   break;
                case "updatePlayer":

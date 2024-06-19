@@ -32,6 +32,7 @@
 
       var name = draggable.attr('name');
       var typeId = draggable.attr('type-id');
+      var interesseId = draggable.attr('interesse-id');
       var type = draggable.attr('type');
       var oldTeamId = draggable.attr('team-id');
       var oldTrainingId = draggable.attr('training-id');
@@ -54,6 +55,7 @@
         name: name,
         type: type,
         typeId: typeId,
+        interesseId: interesseId,
         information: information,
         teamId: isTeam ? newTeamId : oldTeamId,
         trainingId: isTrainingGroups ? newTeamId : oldTrainingId,

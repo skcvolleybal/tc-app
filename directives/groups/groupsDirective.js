@@ -23,12 +23,14 @@
 
         $scope.ChangePosition = function (player, newType) {
           player.typeId = newType.id;
+          player.interesseId = 8;
           player.changeType = changeService.changeTypes.updatePlayer;
           playerService.ChangePlayer(player);
           changeService.SaveChange(player);
         };
 
         $scope.ChangeInteresse = function (player, newType) {
+          player.typeId = newType.id;
           player.interesseId = newType.id;
           player.changeType = changeService.changeTypes.updatePlayer;
           playerService.ChangePlayer(player);

@@ -176,7 +176,7 @@
          }
 
          // For now keep interesseId as geen, TODO
-         $interesseId = 6;
+         $interesseId = 8;
 
          $query = "insert into tcapp_players (name, team_id, training_id, type_id, interesse_id) values (:name, :teamId, :trainingId, :typeId, :interesseId)";
          $params = [

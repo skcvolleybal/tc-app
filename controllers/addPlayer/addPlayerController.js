@@ -20,7 +20,8 @@
             name: player.name,
             teamId: player.teamId,
             trainingId: player.trainingId,
-            typeId: player.typeId
+            typeId: player.typeId,
+            interesseId: 8
          }
          changeService.SaveChange(change);
 

@@ -136,7 +136,9 @@ INSERT INTO `tcapp_interesse_types` (`id`, `interesse_name`) VALUES
 (3, 'Passer-loper'),
 (4, 'Diagonaal'),
 (5, 'Libero'),
-(6, 'Geen');
+(6, 'Niets'),
+(7, 'Trainingslid'),
+(8, 'Geen');
 
 COMMIT;
 

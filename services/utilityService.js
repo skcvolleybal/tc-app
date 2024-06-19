@@ -14,86 +14,111 @@
 
     function GetClassForPosition(typeId) {
       var playerTypeClass = _playerTypeClasses[typeId];
+      const style = {}
       if (!playerTypeClass) {
         var playerType = FirstOrDefault(dataLists.GetPlayerTypes(), function (playerType) {
           return playerType.id == typeId;
         });
         switch (playerType.name) {
           case 'Spelverdeler':
-            background = '#d9534f'
+            style.background = '#d9534f'
+            style['font-style'] = 'normal';
             break;
           case 'Midden':
             // styles = setMiddenStyle(typeId, playerId)
-            background = '#5cb85c';
+            style.background = '#5cb85c';
+            style['font-style'] = 'normal';
             break;
           case 'Passer-loper':
             // styles = setPasserStyle(typeId, playerId)
-            background = '#f0ad4e';
+            style.background = '#f0ad4e';
+            style['font-style'] = 'normal';
             break;
           case 'Diagonaal':
-            background = '#1bc5f8';
+            style.background = '#1bc5f8';
+            style['font-style'] = 'normal';
             break;
           case 'Libero':
-            background ='#337ab7';
+            style.background ='#337ab7';
+            style['font-style'] = 'normal';
             break;
           case 'Trainingslid':
-            styles.background ='#f8e71c';
+            style.background = '#8a8888fc'
+            style.border = 'border 1px solid #808080'
+            style['font-style'] = 'normal';
             break;
           case 'Interesse':
-            // styles.color = '#5e5e5e';
-            // styles.border = '1px solid #808080';
-            styles.background ='#ff6f61';
-            // styles['font-style'] = 'italic';
+            style.background = '#8a8888fc'
+            style.border = 'border 1px solid #808080'
+            style['font-style'] = 'italic';
             break;
           case 'Uitgeschreven':
-            background ='#555';
-            // styles['text-decoration'] = 'line-through';
+            style.background ='#555';
+            style.color = '#eee';
+            style.border = 'border 1px solid #808080'
+            style['text-decoration'] = 'line-through';
+            style['font-style'] = 'normal';
+            break;
+          case 'Nog Niets':
+            style.background = '#3b3333'
+            style['font-style'] = 'normal';
             break;
           default:
-            background = '#ff6f61';
+            style.background = '#ff6f61';
             break;
         }
         // _playerTypeClasses[typeId] = styles;
         // playerTypeClass = styles;
       }
-      return background;
+      return style;
     }
 
-    function GetInteresseForPosition(interestId) {
+    function GetInteresseForPosition(interestId, styles) {
       switch (interestId) {
         case 1: //'Interesse-spelverdeler':
-          border = '2px solid #d9534f'
+          styles.background = '#d9534f'
+          styles['font-style'] = 'italic';
           break;
         case 2: // 'Interesse-midden':
-          // styles = setMiddenInteresse()
-          border = '2px solid #5cb85c';
+          styles.background = '#5cb85c';
+          styles['font-style'] = 'italic';
           break;
         case 3: //'Interesse-passer-loper':
-          border = '2px solid #f0ad4e';
+          styles.background = '#f0ad4e';
+          styles['font-style'] = 'italic';
           break;
         case 4: //'Interesse-diagonaal':
-          border = '2px solid #1bc5f8';
+          styles.background = '#1bc5f8';
+          styles['font-style'] = 'italic';
           break;
         case 5: //'Interesse-libero':
-          border =  '2px solid #337ab7';
+          styles.background ='#337ab7';
+          styles['font-style'] = 'italic';
           break;
-        case 6: //'Geen':
-          border = '2px solid white';
+        case 6: // Interesse-niets
+          styles.background = '#3b3333'
+          styles['font-style'] = 'italic';
           break;
+        case 7: //'Interesse-trainingslid':
+          styles.background = '#8a8888fc'
+          styles.border = 'border 1px solid #808080'
+          styles['font-style'] = 'italic';
+            break;
+        case 8: //'Geen':
+          return styles;
+  
         default:
-          border = '2px solid white';
-          break;
+          return styles;
       }
-      return border
+      return styles
     }
 
     function GetStyleForPosition(typeId, interesseId) {
-      styles = {'background' : '#eee',
-                'border': '2px solid blue'
-      }
-      styles.background = GetClassForPosition(typeId);
-      styles.border = GetInteresseForPosition(interesseId);
-
+      if (typeof typeId === 'string') typeId = parseInt(typeId, 10);
+      if (typeof interesseId === 'string') interesseId = parseInt(interesseId, 10)
+      
+      styles = GetClassForPosition(typeId);
+      styles = GetInteresseForPosition(interesseId, styles);
       return styles
 
     }
