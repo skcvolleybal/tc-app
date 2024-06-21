@@ -93,7 +93,7 @@
                      player.id, 
                      player.name, 
                      type.name as type,
-                     interesse.interesse_name as interesse
+                     interesse.interesse_name as interesse,
                      training.name as training,
                      team.name as team,
                      information
