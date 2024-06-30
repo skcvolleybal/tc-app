@@ -33,8 +33,6 @@ class GuestActions
          return ['message' => "Welkom bij TC-app $user_nicename", 'dataLists' => $dataLists];
       }
 
-
-      die();
    }
 
    public function CheckIfuserIsLoggedIn()
