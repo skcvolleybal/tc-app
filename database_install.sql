@@ -1,5 +1,5 @@
 
-CREATE TABLE `tcapp_players` (
+CREATE TABLE IF NOT EXISTS `tcapp_players` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `type_id` int(11) NOT NULL,
@@ -11,7 +11,8 @@ CREATE TABLE `tcapp_players` (
   `date_modified` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-CREATE TABLE `tcapp_player_types` (
+
+CREATE TABLE IF NOT EXISTS `tcapp_player_types` (
   `id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -27,7 +28,8 @@ INSERT INTO `tcapp_player_types` (`id`, `name`) VALUES
 (8, 'Interesse'),
 (9, 'Uitgeschreven');
 
-CREATE TABLE `tcapp_teams` (
+
+CREATE TABLE IF NOT EXISTS  `tcapp_teams` (
   `id` int(11) NOT NULL,
   `type` enum('training','team') NOT NULL,
   `name` varchar(64) NOT NULL,
@@ -102,7 +104,8 @@ ALTER TABLE `tcapp_player_types`
 ALTER TABLE `tcapp_teams`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1061;
 
-CREATE TABLE `tcapp_interesse_types` (
+
+CREATE TABLE IF NOT EXISTS `tcapp_interesse_types` (
   `id` int NOT NULL,
   `interesse_name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
