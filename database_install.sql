@@ -1,10 +1,4 @@
 
-```
-SET SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO';
-START TRANSACTION;
-SET time_zone = '+00:00';
-
-
 CREATE TABLE `tcapp_players` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
@@ -132,7 +126,3 @@ INSERT INTO `tcapp_interesse_types` (`id`, `interesse_name`) VALUES
 (8, 'Geen');
 
 COMMIT;
-
-
-
-```
